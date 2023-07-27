@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.errors.threads &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.interfaces" href="../../interfaces/index.html" />
+    <link rel="prev" title="luminal.errors.system" href="../system/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/metadata/index.html">metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/photon/index.html">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/handler/index.html">handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/loader/index.html">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/resolver/index.html">resolver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/threads/index.html">threads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/tracer/index.html">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">system</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.errors</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.errors.threads</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.errors.threads">
+<span id="luminal-errors-threads"></span><h1><a class="reference internal" href="#module-luminal.errors.threads" title="luminal.errors.threads"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.errors.threads</span></code></a><a class="headerlink" href="#module-luminal.errors.threads" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="luminal.errors.threads.NoThreadsFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NoThreadsFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.errors.threads.NoThreadsFoundError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when no threads are available to run.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">NoThreadsFoundError</span><span class="p">(</span><span class="s2">&quot;No threads available to run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="luminal.errors.threads.ThreadManagerAlreadyRunningError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ThreadManagerAlreadyRunningError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.errors.threads.ThreadManagerAlreadyRunningError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when a thread manager is already running.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">ThreadManagerAlreadyRunningError</span><span class="p">(</span><span class="s2">&quot;Thread manager already running!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="luminal.errors.threads.ThreadsAlreadyRunningError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ThreadsAlreadyRunningError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.errors.threads.ThreadsAlreadyRunningError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when threads are already running.</p>
+<section id="examples">
+<h3>Examples:<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">ThreadsAlreadyRunningError</span><span class="p">(</span><span class="s2">&quot;Threads are already running!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="luminal.errors.threads.ThreadLimitReachedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ThreadLimitReachedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.errors.threads.ThreadLimitReachedError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when the maximum number of threads has been reached.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">ThreadLimitReachedError</span><span class="p">(</span><span class="s2">&quot;Thread limit has been reached!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../system/index.html" class="btn btn-neutral float-left" title="luminal.errors.system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../interfaces/index.html" class="btn btn-neutral float-right" title="luminal.interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

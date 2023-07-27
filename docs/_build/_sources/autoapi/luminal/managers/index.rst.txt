@@ -1,0 +1,19 @@
+:py:mod:`luminal.managers`
+==========================
+
+.. py:module:: luminal.managers
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   handler/index.rst
+   loader/index.rst
+   resolver/index.rst
+   threads/index.rst
+   tracer/index.rst
+
+

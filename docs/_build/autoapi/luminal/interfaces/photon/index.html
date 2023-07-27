@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.interfaces.photon &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.managers" href="../../managers/index.html" />
+    <link rel="prev" title="luminal.interfaces.metadata" href="../metadata/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../metadata/index.html">metadata</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/handler/index.html">handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/loader/index.html">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/resolver/index.html">resolver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/threads/index.html">threads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../managers/tracer/index.html">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/system/index.html">system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/threads/index.html">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.interfaces</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.interfaces.photon</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.interfaces.photon">
+<span id="luminal-interfaces-photon"></span><h1><a class="reference internal" href="#module-luminal.interfaces.photon" title="luminal.interfaces.photon"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.interfaces.photon</span></code></a><a class="headerlink" href="#module-luminal.interfaces.photon" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#luminal.interfaces.photon.IPhotonMeta" title="luminal.interfaces.photon.IPhotonMeta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IPhotonMeta</span></code></a></p></td>
+<td><p>The metaclass for the abstract base class <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a> that enables    the specification of authorship, version, tags, and a description    for the derived classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IPhoton</span></code></a></p></td>
+<td><p>Base class for all Luminal photons.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IPhotonMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABCMeta</span></code></a>, <a class="reference internal" href="../metadata/index.html#luminal.interfaces.metadata.MetaProperties" title="luminal.interfaces.metadata.MetaProperties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">luminal.interfaces.metadata.MetaProperties</span></code></a></p>
+<p>The metaclass for the abstract base class <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a> that enables    the specification of authorship, version, tags, and a description    for the derived classes.</p>
+<p>This metaclass is used to define several class attributes for any    class that derives from the base class <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>. The attributes are    used to provide metadata about the derived class. The metaclass is    created by inheriting from <code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">MetaProperties</span></code> and includes    multiple attributes.</p>
+<section id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>This metaclass is typically used by inheriting it from an <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a> base class.</p></li>
+<li><p>To specify values for the metadata attributes in a derived class, simply    define the corresponding attributes inside the class definition with    appropriate values.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyPhotonInterface</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">IPhotonMeta</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Here, a new class named <code class="docutils literal notranslate"><span class="pre">MyPhotonInterface</span></code> is created with the photon-specific metadata.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta.__photon_name__">
+<span class="sig-name descname"><span class="pre">__photon_name__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta.__photon_name__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta.__photon_author__">
+<span class="sig-name descname"><span class="pre">__photon_author__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta.__photon_author__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta.__photon_version__">
+<span class="sig-name descname"><span class="pre">__photon_version__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta.__photon_version__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta.__photon_description__">
+<span class="sig-name descname"><span class="pre">__photon_description__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta.__photon_description__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhotonMeta.__photon_tags__">
+<span class="sig-name descname"><span class="pre">__photon_tags__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.interfaces.photon.IPhotonMeta.__photon_tags__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IPhoton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhoton" title="Permalink to this definition"></a></dt>
+<dd><p>Base class for all Luminal photons.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This class provides several other utility functions and properties that can be used by Luminal photons.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.photon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.photon_name" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the name of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cls</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Type[Self&#64;IPhoton]</span></code>) – The base class itself.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the photon.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.photon_author">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photon_author</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.photon_author" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the author of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cls</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Type[Self&#64;IPhoton]</span></code>) – The base class itself.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The author of the photon, as a string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.photon_version">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photon_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.photon_version" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the version of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cls</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Type[Self&#64;IPhoton]</span></code>) – The base class itself.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The version of the photon, as a string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.photon_description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photon_description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.photon_description" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the description of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cls</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Type[Self&#64;IPhoton]</span></code>) – The base class itself.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The description of the photon, as a string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.photon_tags">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photon_tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.photon_tags" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of tags associated with the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cls</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Type[Self&#64;IPhoton]</span></code>) – The base class itself.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The list of tags associated with the photon, as a list of strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.__photon_name__">
+<span class="sig-name descname"><span class="pre">__photon_name__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.__photon_name__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.__photon_author__">
+<span class="sig-name descname"><span class="pre">__photon_author__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.__photon_author__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.__photon_version__">
+<span class="sig-name descname"><span class="pre">__photon_version__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.__photon_version__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.__photon_description__">
+<span class="sig-name descname"><span class="pre">__photon_description__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.__photon_description__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.__photon_tags__">
+<span class="sig-name descname"><span class="pre">__photon_tags__</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.__photon_tags__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton._print">
+<span class="sig-name descname"><span class="pre">_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stdout</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhoton._print" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the given message to the console or a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The message to print to the console.</p></li>
+<li><p><strong>file</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>]) – The IO stream that should be written to.</p></li>
+<li><p><strong>**kwargs</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>]) – The keyword arguments of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton.print" title="luminal.interfaces.photon.IPhoton.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> call.</p></li>
+<li><p><strong>print_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stdout</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.print" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the given message to the console or a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The message to print to the console.</p></li>
+<li><p><strong>file</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>]) – The IO stream that should be written to.</p></li>
+<li><p><strong>**kwargs</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>]) – The keyword arguments of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton.print" title="luminal.interfaces.photon.IPhoton.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> call.</p></li>
+<li><p><strong>print_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.eprint">
+<span class="sig-name descname"><span class="pre">eprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stderr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.eprint" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the given error message to the console or a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The error message to print to the console.</p></li>
+<li><p><strong>file</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>]) – The IO stream that should be written to.</p></li>
+<li><p><strong>**kwargs</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>]) – The keyword arguments of the <a class="reference internal" href="#luminal.interfaces.photon.IPhoton.print" title="luminal.interfaces.photon.IPhoton.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> call.</p></li>
+<li><p><strong>print_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.interfaces.photon.IPhoton.finalize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.interfaces.photon.IPhoton.finalize" title="Permalink to this definition"></a></dt>
+<dd><p>A method that can, and should, be overridden to perform finalization tasks when the photon is unloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A flag which returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the finalization method completed successfully, else <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../errors/cleanup/index.html#luminal.errors.cleanup.FinalizerNotImplementedError" title="luminal.errors.cleanup.FinalizerNotImplementedError"><strong>FinalizerNotImplementedError</strong></a> – If this method is not implemented by the subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../metadata/index.html" class="btn btn-neutral float-left" title="luminal.interfaces.metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../managers/index.html" class="btn btn-neutral float-right" title="luminal.managers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

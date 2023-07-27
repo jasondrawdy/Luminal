@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.managers.tracer &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.tools" href="../../tools/index.html" />
+    <link rel="prev" title="luminal.managers.threads" href="../threads/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/metadata/index.html">metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/photon/index.html">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../handler/index.html">handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader/index.html">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resolver/index.html">resolver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../threads/index.html">threads</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/system/index.html">system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/threads/index.html">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.tracer</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.managers.tracer">
+<span id="luminal-managers-tracer"></span><h1><a class="reference internal" href="#module-luminal.managers.tracer" title="luminal.managers.tracer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.tracer</span></code></a><a class="headerlink" href="#module-luminal.managers.tracer" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoopTask</span></code></a></p></td>
+<td><p>A wrapper for a coroutine and its arguments which will be started at</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoopTrace</span></code></a></p></td>
+<td><p>The <a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code></a> class serves as a versatile tool for testing loops of</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LoopTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">at_iteration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coroutine</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.tracer.LoopTask" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a coroutine and its arguments which will be started at
+a specific iteration within an infinite loop, or any loop in general.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="n">some_arg</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">some_arg</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task</span> <span class="o">=</span> <span class="n">LoopTask</span><span class="p">(</span><span class="n">at_iteration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">coroutine</span><span class="o">=</span><span class="n">do_task</span><span class="p">,</span> <span class="n">some_arg</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run a loop and start the coroutine when on the 5th iteration.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">task</span><span class="o">.</span><span class="n">_at_iteration</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">await</span> <span class="n">task</span><span class="o">.</span><span class="n">coroutine</span><span class="p">(</span><span class="o">*</span><span class="n">task</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>at_iteration</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – </p></li>
+<li><p><strong>coroutine</strong> (<em>Awaitable</em>) – </p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LoopTrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iteration_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.tracer.LoopTrace" title="Permalink to this definition"></a></dt>
+<dd><p>The <a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code></a> class serves as a versatile tool for testing loops of
+any type, including infinite loops. It can be effortlessly placed within
+any codebase and seamlessly integrated with all loops that call its
+<code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate_tasks()</span></code> method.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="n">some_arg</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">some_arg</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task</span> <span class="o">=</span> <span class="n">LoopTask</span><span class="p">(</span><span class="n">at_iteration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">coroutine</span><span class="o">=</span><span class="n">do_task</span><span class="p">,</span> <span class="n">some_arg</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span> <span class="o">=</span> <span class="n">LoopTrace</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="n">iteration_limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create an infinite loop and start the coroutine when on the 5th iteration.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">await</span> <span class="n">trace</span><span class="o">.</span><span class="n">evaluate_tasks</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tasks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><em>LoopTask</em></a><em>]</em>) – </p></li>
+<li><p><strong>iteration_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.tasks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><span class="pre">LoopTask</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.tasks" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all available tasks to run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The list of all tasks added to the <a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List[LoopTask]</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.tasks_with_keys">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks_with_keys</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><span class="pre">LoopTask</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.tasks_with_keys" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all available tasks to run and their respective iteration        as a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict[int,</span> <span class="pre">LoopTask]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of tasks along with their specific iteration number.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict[int,</span> <span class="pre">LoopTask]</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.iteration_limit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iteration_limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.iteration_limit" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the maximum limit of iterations for the current <a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The maximum number of iterations after which the evaluation will stop.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.current_iteration">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_iteration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.current_iteration" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current loop iteration of the <a class="reference internal" href="#luminal.managers.tracer.LoopTrace" title="luminal.managers.tracer.LoopTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current iteration that is being evaluated.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.add_task">
+<span class="sig-name descname"><span class="pre">add_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.add_task" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a new task to the already existing tasks list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task</strong> (<a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTask</span></code></a>) – A task instance that needs to be added to the tasks list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the task was added, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.11)"><strong>KeyError</strong></a> – If the task is already present in the tasks list.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task</span> <span class="o">=</span> <span class="n">LoopTask</span><span class="p">(</span><span class="n">at_iteration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">coroutine</span><span class="o">=</span><span class="n">do_task</span><span class="p">,</span> <span class="n">some_arg</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span> <span class="o">=</span> <span class="n">LoopTrace</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="c1"># Raises KeyError as the task is already present in the tasks list.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.remove_task">
+<span class="sig-name descname"><span class="pre">remove_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.remove_task" title="Permalink to this definition"></a></dt>
+<dd><p>Removes a task from the already existing tasks list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task</strong> (<a class="reference internal" href="#luminal.managers.tracer.LoopTask" title="luminal.managers.tracer.LoopTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTask</span></code></a>) – The task instance that needs to be removed from the tasks list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the task was removed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task</span> <span class="o">=</span> <span class="n">LoopTask</span><span class="p">(</span><span class="n">at_iteration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">coroutine</span><span class="o">=</span><span class="n">do_task</span><span class="p">,</span> <span class="n">some_arg</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span> <span class="o">=</span> <span class="n">LoopTrace</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span><span class="o">.</span><span class="n">remove_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="c1"># Returns True as the task was removed from the tasks list.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.tracer.LoopTrace.evalutate_tasks">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evalutate_tasks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.tracer.LoopTrace.evalutate_tasks" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates and executes the tasks that are supposed to be started at
+the current iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#StopIteration" title="(in Python v3.11)"><strong>StopIteration</strong></a> – If the iteration limit has been reached.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task</span> <span class="o">=</span> <span class="n">LoopTask</span><span class="p">(</span><span class="n">at_iteration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">coroutine</span><span class="o">=</span><span class="n">do_task</span><span class="p">,</span> <span class="n">some_arg</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trace</span> <span class="o">=</span> <span class="n">LoopTrace</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="n">iteration_limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create an infinite loop and start the coroutine when on the 5th iteration.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">await</span> <span class="n">lt</span><span class="o">.</span><span class="n">evaluate_tasks</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../threads/index.html" class="btn btn-neutral float-left" title="luminal.managers.threads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../tools/index.html" class="btn btn-neutral float-right" title="luminal.tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

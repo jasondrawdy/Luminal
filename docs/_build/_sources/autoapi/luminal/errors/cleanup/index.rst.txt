@@ -1,0 +1,45 @@
+:py:mod:`luminal.errors.cleanup`
+================================
+
+.. py:module:: luminal.errors.cleanup
+
+
+Module Contents
+---------------
+
+.. py:exception:: FinalizerNotImplementedError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when a photon does not implement the `finalize()` method.
+
+   .. rubric:: Examples
+
+   >>> raise FinalizerNotImplementedError("Finalize method not implemented in photon!")
+
+
+.. py:exception:: PhotonNotInitializedError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when a photon is not initialized before usage.
+
+   .. rubric:: Examples
+
+   >>> raise PhotonNotInitializedError("Photon has not been initialized!")
+
+
+.. py:exception:: PhotonNotFoundError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when a photon cannot be found.
+
+   .. rubric:: Examples
+
+   >>> raise PhotonNotFoundError("Photon could not be found!")
+
+

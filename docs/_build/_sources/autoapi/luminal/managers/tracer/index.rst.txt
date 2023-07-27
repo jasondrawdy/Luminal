@@ -1,0 +1,156 @@
+:py:mod:`luminal.managers.tracer`
+=================================
+
+.. py:module:: luminal.managers.tracer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.managers.tracer.LoopTask
+   luminal.managers.tracer.LoopTrace
+
+
+
+
+.. py:class:: LoopTask(at_iteration, coroutine, *args)
+
+
+   A wrapper for a coroutine and its arguments which will be started at
+   a specific iteration within an infinite loop, or any loop in general.
+
+   .. rubric:: Examples
+
+   >>> async def do_task(some_arg):
+   ...     await asyncio.sleep(1)
+   ...     print(some_arg)
+   ...
+   >>> task = LoopTask(at_iteration=5, coroutine=do_task, some_arg='hello')
+   >>> # Run a loop and start the coroutine when on the 5th iteration.
+   >>> for i in range(10):
+   ...     if i == task._at_iteration:
+   ...         await task.coroutine(*task.args)
+
+
+.. py:class:: LoopTrace(tasks, iteration_limit = 0)
+
+
+   The :class:`LoopTrace` class serves as a versatile tool for testing loops of
+   any type, including infinite loops. It can be effortlessly placed within
+   any codebase and seamlessly integrated with all loops that call its
+   :func:`evaluate_tasks()` method.
+
+   .. rubric:: Examples
+
+   >>> async def do_task(some_arg):
+   ...     print(some_arg)
+   ...
+   >>> task = LoopTask(at_iteration=5, coroutine=do_task, some_arg='hello')
+   >>> trace = LoopTrace(tasks=[task], iteration_limit=10)
+   >>> # Create an infinite loop and start the coroutine when on the 5th iteration.
+   >>> while True:
+   ...     try:
+   ...         await trace.evaluate_tasks()
+   ...     except StopIteration:
+   ...         break
+
+   .. py:property:: tasks
+      :type: list[LoopTask]
+
+      Returns a list of all available tasks to run.
+
+      :returns: The list of all tasks added to the :class:`LoopTrace`.
+      :rtype: :class:`List[LoopTask]`
+
+   .. py:property:: tasks_with_keys
+      :type: dict[int, LoopTask]
+
+      Returns a list of all available tasks to run and their respective iteration        as a :class:`dict[int, LoopTask]`.
+
+      :returns: A dictionary of tasks along with their specific iteration number.
+      :rtype: :class:`dict[int, LoopTask]`
+
+   .. py:property:: iteration_limit
+      :type: int
+
+      Returns the maximum limit of iterations for the current :class:`LoopTrace` instance.
+
+      :returns: The maximum number of iterations after which the evaluation will stop.
+      :rtype: :class:`int`
+
+   .. py:property:: current_iteration
+      :type: int
+
+      Returns the current loop iteration of the :class:`LoopTrace` instance.
+
+      :returns: The current iteration that is being evaluated.
+      :rtype: :class:`int`
+
+   .. py:method:: add_task(task)
+
+      Adds a new task to the already existing tasks list.
+
+      :param task: A task instance that needs to be added to the tasks list.
+      :type task: :class:`LoopTask`
+
+      :returns: Returns ``True`` if the task was added, ``False`` otherwise.
+      :rtype: :class:`bool`
+
+      :raises KeyError: If the task is already present in the tasks list.
+
+      .. rubric:: Examples
+
+      >>> def do_task(args):
+      ...    print(args)
+      >>> task = LoopTask(at_iteration=5, coroutine=do_task, some_arg='hello')
+      >>> trace = LoopTrace(tasks=[task])
+      >>> trace.add_task(task) # Raises KeyError as the task is already present in the tasks list.
+
+
+   .. py:method:: remove_task(task)
+
+      Removes a task from the already existing tasks list.
+
+      :param task: The task instance that needs to be removed from the tasks list.
+      :type task: :class:`LoopTask`
+
+      :returns: Returns ``True`` if the task was removed, ``False`` otherwise.
+      :rtype: :class:`bool`
+
+      .. rubric:: Examples
+
+      >>> def do_task(args):
+      ...    print(args)
+      >>> task = LoopTask(at_iteration=5, coroutine=do_task, some_arg='hello')
+      >>> trace = LoopTrace(tasks=[task])
+      >>> trace.remove_task(task) # Returns True as the task was removed from the tasks list.
+
+
+   .. py:method:: evalutate_tasks()
+      :async:
+
+      Evaluates and executes the tasks that are supposed to be started at
+      the current iteration.
+
+      :raises StopIteration: If the iteration limit has been reached.
+
+      .. rubric:: Example
+
+      >>> def do_task(args):
+      ...    print(args)
+      >>> task = LoopTask(at_iteration=5, coroutine=do_task, some_arg='hello')
+      >>> trace = LoopTrace(tasks=[task], iteration_limit=10)
+      >>> # Create an infinite loop and start the coroutine when on the 5th iteration.
+      >>> while True:
+      ...     try:
+      ...         await lt.evaluate_tasks()
+      ...     except StopIteration:
+      ...         break
+
+
+

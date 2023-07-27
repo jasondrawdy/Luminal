@@ -1,0 +1,64 @@
+:py:mod:`luminal.tools.sentinel`
+================================
+
+.. py:module:: luminal.tools.sentinel
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.tools.sentinel.Sentinel
+
+
+
+
+.. py:class:: Sentinel(id = TextUtils().generate_id(10))
+
+
+   Bases: :py:obj:`object`
+
+   Sentinel is a system watching mechanism created to dynamically monitor files or collect garbage.
+
+   .. py:method:: _find_garbage(path)
+
+      Obtains all blacklisted files and directories recursively within a given path.
+
+      :param path: The directory that the sentinel should monitor for collection.
+      :type path: :class:`str`
+
+
+   .. py:method:: _check_system()
+
+      Gathers all Python based cache files and removes them recursively.
+
+
+   .. py:method:: _start_resolving(time = 1)
+
+      Creates a monitor resolver by utilizing a non-blocking asynchronous system watcher function.
+
+      :param time: How long the thread should wait before continuing to loop.
+      :type time: Optional[:class:`int`]
+
+
+   .. py:method:: start()
+
+      Starts the sentinel and allows it to monitor as long as `monitoring` and `authorized` is set to `True`.
+
+
+   .. py:method:: watch_system(time)
+      :async:
+
+      ``|coro|``
+
+      Initial sentinel loop which allows the sentinel to monitor for artifacts.
+
+      :param time: How long the thread should wait before continuing to loop.
+      :type time: :class:`int`
+
+
+

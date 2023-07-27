@@ -1,0 +1,202 @@
+:py:mod:`luminal.interfaces.photon`
+===================================
+
+.. py:module:: luminal.interfaces.photon
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.interfaces.photon.IPhotonMeta
+   luminal.interfaces.photon.IPhoton
+
+
+
+
+.. py:class:: IPhotonMeta(*args, **kwargs)
+
+
+   Bases: :py:obj:`abc.ABCMeta`, :py:obj:`luminal.interfaces.metadata.MetaProperties`
+
+   The metaclass for the abstract base class :class:`IPhoton` that enables    the specification of authorship, version, tags, and a description    for the derived classes.
+
+   This metaclass is used to define several class attributes for any    class that derives from the base class :class:`IPhoton`. The attributes are    used to provide metadata about the derived class. The metaclass is    created by inheriting from :class:`ABCMeta` and :class:`MetaProperties` and includes    multiple attributes.
+
+   Usage
+   ----------
+   - This metaclass is typically used by inheriting it from an :class:`IPhoton` base class.
+   - To specify values for the metadata attributes in a derived class, simply    define the corresponding attributes inside the class definition with    appropriate values.
+
+   .. rubric:: Examples
+
+   >>> class MyPhotonInterface(metaclass=IPhotonMeta):
+   >>> ...
+
+   Here, a new class named ``MyPhotonInterface`` is created with the photon-specific metadata.
+
+   .. py:attribute:: __photon_name__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_author__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_version__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_description__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_tags__
+      :type: list[str]
+
+      
+
+
+.. py:class:: IPhoton(*args, **kwargs)
+
+
+   Base class for all Luminal photons.
+
+   .. important:: This class provides several other utility functions and properties that can be used by Luminal photons.
+
+   .. py:property:: photon_name
+      :type: str
+
+      Returns the name of the :class:`IPhoton`.
+
+      :param cls: The base class itself.
+      :type cls: :class:`Type[Self@IPhoton]`
+
+      :returns: The name of the photon.
+      :rtype: :class:`str`
+
+   .. py:property:: photon_author
+      :type: str
+
+      Returns the author of the :class:`IPhoton`.
+
+      :param cls: The base class itself.
+      :type cls: :class:`Type[Self@IPhoton]`
+
+      :returns: The author of the photon, as a string.
+      :rtype: :class:`str`
+
+   .. py:property:: photon_version
+      :type: str
+
+      Returns the version of the :class:`IPhoton`.
+
+      :param cls: The base class itself.
+      :type cls: :class:`Type[Self@IPhoton]`
+
+      :returns: The version of the photon, as a string.
+      :rtype: :class:`str`
+
+   .. py:property:: photon_description
+      :type: str
+
+      Returns the description of the :class:`IPhoton`.
+
+      :param cls: The base class itself.
+      :type cls: :class:`Type[Self@IPhoton]`
+
+      :returns: The description of the photon, as a string.
+      :rtype: :class:`str`
+
+   .. py:property:: photon_tags
+      :type: list[str]
+
+      Returns the list of tags associated with the :class:`IPhoton`.
+
+      :param cls: The base class itself.
+      :type cls: :class:`Type[Self@IPhoton]`
+
+      :returns: The list of tags associated with the photon, as a list of strings.
+      :rtype: :class:`list`
+
+   .. py:attribute:: __photon_name__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_author__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_version__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_description__
+      :type: str
+
+      
+
+   .. py:attribute:: __photon_tags__
+      :type: list[str]
+
+      
+
+   .. py:method:: _print(message, print_output = True, file = sys.stdout, **kwargs)
+
+      Prints the given message to the console or a file.
+
+      :param message: The message to print to the console.
+      :type message: :class:`str`
+      :param file: The IO stream that should be written to.
+      :type file: Optional[:class:`TextIO`]
+      :param \*\*kwargs: The keyword arguments of the :func:`print()` call.
+      :type \*\*kwargs: Optional[:class:`dict[str, Any]`]
+
+
+   .. py:method:: print(message, print_output = True, file = sys.stdout, **kwargs)
+
+      Prints the given message to the console or a file.
+
+      :param message: The message to print to the console.
+      :type message: :class:`str`
+      :param file: The IO stream that should be written to.
+      :type file: Optional[:class:`TextIO`]
+      :param \*\*kwargs: The keyword arguments of the :func:`print()` call.
+      :type \*\*kwargs: Optional[:class:`dict[str, Any]`]
+
+
+   .. py:method:: eprint(message, print_output = True, file = sys.stderr, **kwargs)
+
+      Prints the given error message to the console or a file.
+
+      :param message: The error message to print to the console.
+      :type message: :class:`str`
+      :param file: The IO stream that should be written to.
+      :type file: Optional[:class:`TextIO`]
+      :param \*\*kwargs: The keyword arguments of the :func:`print()` call.
+      :type \*\*kwargs: Optional[:class:`dict[str, Any]`]
+
+
+   .. py:method:: finalize()
+      :async:
+
+      A method that can, and should, be overridden to perform finalization tasks when the photon is unloaded.
+
+      :returns: A flag which returns ``True`` if the finalization method completed successfully, else ``False``.
+      :rtype: :class:`bool`
+
+      :raises FinalizerNotImplementedError: If this method is not implemented by the subclass.
+
+
+

@@ -1,0 +1,158 @@
+:py:mod:`luminal.managers.handler`
+==================================
+
+.. py:module:: luminal.managers.handler
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.managers.handler.Handler
+
+
+
+
+.. py:class:: Handler(logging, name, filepath, checksum, instance)
+
+
+   Wraps an :class:`IPhoton` or another inherited photon base class and provides access to local instance information.
+
+   .. py:property:: name
+      :type: str
+
+      Returns the name of the current :class:`Handler` instance.
+
+      :returns: The name of the current :class:`Handler` instance.
+      :rtype: :class:`str`
+
+   .. py:property:: filepath
+      :type: str
+
+      Returns the file path of the current :class:`Handler` instance.
+
+      :returns: The file path of the current :class:`Handler` instance.
+      :rtype: :class:`str`
+
+   .. py:property:: checksum
+      :type: str
+
+      Returns the checksum of the original photon file.
+
+      :returns: The checksum of the original file containing the photon.
+      :rtype: :class:`str`
+
+   .. py:method:: __str__()
+
+      Returns the current :class:`Handler` instance as its string representation.
+
+      :returns: A string representation of the :class:`Handler` object created by the
+                :func:`__dict__()` dunder method.
+      :rtype: :class:`str`
+
+
+   .. py:method:: _get_checksum(filename, block = 2**20)
+      :staticmethod:
+      :async:
+
+      ``|coro|``
+
+      Generates a calculated ``SHA512`` hash for a given file.
+
+      :param filename: The name of the file to generate the checksum for.
+      :type filename: :class:`str`
+      :param block: Chunk size to read and hash the file in bytes. Default is ``2^20``.
+      :type block: Optional[:class:`int`]
+
+      :returns: The calculated ``SHA512`` hash of the file, or ``None`` if there was an error generating the checksum.
+      :rtype: Optional[:class:`str`]
+
+      .. rubric:: Notes
+
+      - This function generates a ``SHA512`` hash for a given file by reading the file in blocks and hashing each block.        The generated hash is a digest checksum (a unique fixed-sized representation of the file content).        The file is treated as a binary file (read in 'rb' mode) for proper handling of all types of files.
+      - The reason ``SHA512`` was chosen is purely for the lack of collisions at runtime when performing dynamic checks.
+      - If the specified file cannot be found or if there are any errors while generating the checksum, returns ``None``.
+
+
+   .. py:method:: _clear_module_references()
+      :async:
+
+      ``|coro|``
+
+      Clears all references for the current handler module and its submodules in `sys.modules`.
+
+      :returns: A flag value indicating whether references were cleared successfully.
+      :rtype: :class:`bool`
+
+      .. rubric:: Notes
+
+      - This function clears all references to the current module and any of its submodules in ``sys.modules``.        It is used to ensure that a module can be safely deleted from memory without any leftover references.        The function returns ``True`` if the operation to clear references succeeds. Default is ``False``.
+
+
+   .. py:method:: _stop_photon_threads()
+      :async:
+
+      ``|coro|``
+
+      This function stops all of the running threads that belong to the current photon's thread group. It is typically
+      called during a photon unload to ensure that no threads are left running that could cause errors or conflicts
+      with a new, reloaded photon.
+
+      :returns: A flag indicating whether all photon threads were successfully stopped. This returns ``True`` if
+                all photon threads are successfully stopped. Default is ``False``.
+      :rtype: :class:`bool`
+
+
+   .. py:method:: _stop_photon_processes()
+      :async:
+
+      ``|coro|``
+
+      This function is responsible for stopping and terminating all of the child processes spawned by the handler.
+
+      :returns: A flag indicating whether any child process for the handler were stopped. Default is ``False``.
+      :rtype: :class:`bool`
+
+
+   .. py:method:: _force_stop()
+      :async:
+
+      ``|coro|``
+
+      This function is responsible for forcefully stopping and halting all the running threads and processes of the handler.
+      It calls the :func:`_stop_photon_threads()` and :func:`_stop_photon_processes()` methods to perform these tasks.
+
+
+   .. py:method:: _stop(force_stop = False)
+      :async:
+
+      ``|coro|``
+
+      This function stops the running :class:`IPhoton` instance, halting all the child threads and processes of the instance
+      if any exist. If ``force_stop`` is ``True``, this function calls the :func:`_force_stop()` method to stop the instance.
+      Otherwise, it first calls the :func:`finalize()` method if present in the current instance. If the :func:`finalize()` method
+      does not exist or raises an error, then the :func:`_force_stop()` method is called.
+
+      :param force_stop: A boolean flag indicating whether to forcefully stop the photon instance. Default is ``False``.
+      :type force_stop: Optional[:class:`bool`]
+
+      :raises PhotonNotInitializedError: If the photon has not been initialized.
+
+
+   .. py:method:: start()
+      :async:
+
+      ``|coro|``
+
+      This function starts running the ``IPhoton`` instance by creating it if it does not exist already.
+
+      .. rubric:: Notes
+
+      - If already started, it checks if it's a :class:`tuple`. If the instance is not a :class:`tuple`, it        initializes the ``IPhoton`` instance and stores it as a tuple with a second value set to ``True``.
+
+
+

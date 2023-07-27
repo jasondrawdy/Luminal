@@ -1,0 +1,57 @@
+:py:mod:`luminal.errors.threads`
+================================
+
+.. py:module:: luminal.errors.threads
+
+
+Module Contents
+---------------
+
+.. py:exception:: NoThreadsFoundError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when no threads are available to run.
+
+   .. rubric:: Examples
+
+   >>> raise NoThreadsFoundError("No threads available to run.")
+
+
+.. py:exception:: ThreadManagerAlreadyRunningError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when a thread manager is already running.
+
+   .. rubric:: Examples
+
+   >>> raise ThreadManagerAlreadyRunningError("Thread manager already running!")
+
+
+.. py:exception:: ThreadsAlreadyRunningError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when threads are already running.
+
+   Examples:
+   ----------
+   >>> raise ThreadsAlreadyRunningError("Threads are already running!")
+
+
+.. py:exception:: ThreadLimitReachedError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when the maximum number of threads has been reached.
+
+   .. rubric:: Examples
+
+   >>> raise ThreadLimitReachedError("Thread limit has been reached!")
+
+

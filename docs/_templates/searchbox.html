@@ -1,0 +1,30 @@
+{%- if 'singlehtml' not in builder %}
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version {{ release }} — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="{{ pathto('search') }}" method="get">
+    <input type="text" name="q" placeholder="{{ _('Search documentation...') }}" aria-label="{{ _('Search docs') }}" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+{%- endif %}

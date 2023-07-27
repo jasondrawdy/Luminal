@@ -1,0 +1,21 @@
+:py:mod:`luminal.errors.system`
+===============================
+
+.. py:module:: luminal.errors.system
+
+
+Module Contents
+---------------
+
+.. py:exception:: DirectoryNotFoundError(*args)
+
+
+   Bases: :py:obj:`Exception`
+
+   Error raised when a directory is not found.
+
+   .. rubric:: Examples
+
+   >>> raise DirectoryNotFoundError("Directory not found!")
+
+

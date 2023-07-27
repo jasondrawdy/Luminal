@@ -1,0 +1,567 @@
+:py:mod:`luminal.managers.loader`
+=================================
+
+.. py:module:: luminal.managers.loader
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.managers.loader.Loader
+
+
+
+
+.. py:class:: Loader(logging = False, suppress_errors = False)
+
+
+   Allows management of photons and how they are loaded, unloaded, reloaded, and monitored.
+
+   .. py:property:: photons
+      :type: dict[str, luminal.managers.handler.Handler]
+
+      Returns a dictionary of photon names and corresponding :class:`Handler` objects.
+
+      :returns: A dictionary containing photon names as keys and their corresponding :class:`Handler` objects as values.
+      :rtype: :class:`Dict[str, Handler]`
+
+      .. rubric:: Notes
+
+      - This is a read-only property, meaning that it can only be accessed and not modified.
+      - The photon name is the name assigned to the photon instance in its definition.
+      - The :class:`Handler` objects contain information about the photon, including its name, file path,        and the :class:`IPhoton` based class itself.
+
+   .. py:method:: _validate_module(imported_module, photon_path, photon_base, other_classes = [])
+      :async:
+
+      ``|coro|``
+
+      Checks for all photon instances, specified classes and creates handlers objects for them.
+
+      :param imported_module: The imported module to be validated.
+      :type imported_module: :class:`ModuleType`
+      :param photon_path: The absolute path of the photon module.
+      :type photon_path: :class:`str`
+      :param photon_base: The base class that all photons of the system will inherit from.
+      :type photon_base: :class:`type`
+      :param other_classes: A list of additional classes to check for in the imported module.
+                            Defaults to ``[]``.
+      :type other_classes: Optional[:class:`list[str]`]
+
+      :returns: If the module is a valid photon module, a list of :class:`Handler` objects that correspond
+                to the photon instances and specified classes in the module is returned. If it is not a valid photon module,
+                returns ``False``.
+      :rtype: :class:`Union[List[Handler], bool]`
+
+      .. rubric:: Notes
+
+      - Even if the module is not a valid photon module and it returns ``False``, the ``imported_module`` will still be        deleted from the system.
+
+
+   .. py:method:: _import_module(module_path)
+      :async:
+
+      ``|coro|``
+
+      Resolves, executes, and returns a Python module based on the provided module path.
+
+      :param module_path: The absolute path of the module to be imported.
+      :type module_path: :class:`str`
+
+      :returns: The imported module object.
+      :rtype: :class:`ModuleType`
+
+      :raises ModuleNotFoundError: If the module cannot be found (either due to an incorrect path or it not existing), or
+          if a loader or spec cannot be found for the module.
+
+      .. rubric:: Notes
+
+      - The imported module is added to the ``sys.modules`` dictionary for future reference, and is also returned.
+      - If an error occurs while importing the module and the logging property is set, the error will be logged.
+      - If ``suppress_errors`` is set, the error will be skipped.
+
+
+   .. py:method:: _scan_module(path)
+      :async:
+
+      ``|coro|``
+
+      Determines if the provided path is a package or module.
+
+      :param path: Absolute path of the file or directory to be checked.
+      :type path: :class:`str`
+
+      :returns: A tuple containing the absolute path of the module, a flag indicating whether the
+                path is a package, and a flag indicating if there are only packages in the directory.
+      :rtype: :class:`Tuple[str, bool, bool]`
+
+      :raises ModuleNotFoundError: If the file path provided does not exist, is not accessible or is not a valid photon.
+
+      .. rubric:: Notes
+
+      - The first element, ``path`` in the tuple returned represents the absolute path of the individual module.
+      - The second element, ``is_dir`` in the tuple returned is a boolean value that indicates whether the module        is in fact a package.
+      - The third element of the returned tuple, ``packages_only`` is a boolean value that indicates whether there        are only packages in the directory.
+
+
+   .. py:method:: _find_modules(path)
+      :async:
+
+      ``|coro|``
+
+      Creates a collection of module paths and determines if they're packages.
+
+      :param path: The path of the directory containing the modules.
+      :type path: :class:`str`
+
+      :returns: A tuple containing a list of tuples representing available modules
+                and if they're Python packages, and a boolean representing if there are only packages.
+      :rtype: :class:`Tuple[List[Tuple[str, bool]], bool]`
+
+      .. rubric:: Notes
+
+      - If ``path`` is not a valid directory or cannot be accessed, an empty list will be returned.
+      - The first element, ``module_path`` in the tuple returned represents the absolute path of the individual module.
+      - The second element, ``is_dir`` in the tuple returned is a boolean value that indicates whether the module        is in fact a package.
+      - The second element of the returned tuple, ``packages_only`` is a boolean value that indicates whether there        are only packages in the directory.
+
+
+   .. py:method:: _check_photon(photon)
+      :async:
+
+      ``|coro|``
+
+      Check if the photon belongs to the available photon registry and return the corresponding handler(s).
+
+      :param photon: Name of the photon or :class:`Handler` object.
+      :type photon: :class:`str|Handler`
+
+      :returns: If photon exists in the available photons, return the corresponding handler(s).
+      :rtype: :class:`Union[Handler, List[Handler], None]`
+
+      :raises PhotonNotFoundError:: If photon is not a valid file path or if it does not exist in the available photons.
+
+      .. rubric:: Notes
+
+      - If photon is a :class:`Handler` object, return it as is. If photon does not exist in the        available photons, return ``None``.
+
+
+   .. py:method:: _emit_photon(photon_path, photon_base = IPhoton, other_classes = [], recursive = False)
+      :async:
+
+      ``|coro|``
+
+      Loads and returns a photon from a given path.
+
+      :param photon_path: A string representing the file path of the photon or a tuple representing the photon path along with boolean values indicating if the photon is a module or a package.
+      :type photon_path: :class:`str | tuple[str, bool, bool]`
+      :param photon_base: Base class for photons. Default is :class:`IPhoton`.
+      :type photon_base: Optional[:class:`type`]
+      :param other_classes: List of classes that the photon should inherit from. Default is ``[]``.
+      :type other_classes: Optional[:class:`list[str]`]
+      :param recursive: A flag indicating whether to look for photons recursively in subdirectories under the ``photons_directory``. Default is ``False``.
+      :type recursive: Optional[:class:`bool`]
+
+      :returns: The handler object of the photon that was emitted, a list of handler objects of photons that were emitted, or ``None``.
+      :rtype: :class:`Handler | list[Handler] | None`
+
+      :raises ModuleNotFoundError: When the photon's module is not found.
+      :raises Exception: Generally when a photon author has syntax errors or other issues with their photon source.
+
+      .. rubric:: Notes
+
+      - The :func:`_emit_photon()` function first initializes an empty list called photons. It then checks whether the given path is a module        file or a package directory by checking if the type of ``photon_path`` is a tuple. If so, it retrieves the information about the path's        readiness, the module path, and whether the specified path contains only packages. If the photon is a package and the recursive flag        is ``True`` or the ``package_only`` flag is ``True``, the function reads photons from other levels down in the package.
+      - It then checks if the photon has already been loaded by resolving the module path and accessing the ``_photons`` attribute of the instance        of :class:`Loader`. If the photon is already loaded, a warning message is logged, and ``None`` is returned.
+      - If the photon is not loaded, then the function imports the photon's module path using the :func:`_import_module()` method, and validates the        module with the given photon base class and a list of other classes the photon should inherit from using the :func:`_validate_module()` method.
+      - It returns a list of photons that were validated. If the list of photons is empty, a warning message is logged, and ``None`` is returned.        Otherwise, a success message is logged for loading the photon, and the photons are added to the list.
+      - Finally, the function returns a list of handler objects for the loaded photons.
+
+      .. rubric:: Examples
+
+      >>> loader = Loader()
+      >>> photon = await loader._emit_photon('photons/hello_world.py', IPhoton, ["Other_class1", "Other_class2"])
+
+
+   .. py:method:: _emit_photons(photons_directory, photon_base = IPhoton, other_classes = [], recursive = False)
+      :async:
+
+      ``|coro|``
+
+      Retrieves photon handlers from a specified directory.
+
+      :param photons_directory: A string representing the directory where the photons are located.
+      :type photons_directory: :class:`str`
+      :param photon_base: An optional argument representing the base class for the photons. Default is `IPhoton`.
+      :type photon_base: Optional[:class:`type`]
+      :param other_classes: List of strings representing other classes that the photons should inherit from. Default is :class:`[]`.
+      :type other_classes: Optional[:class:`list[str]`]
+      :param recursive: A boolean indicating whether to look for photons recursively in subdirectories under `photons_directory`. Default is `False`.
+      :type recursive: Optional[:class:`bool`]
+
+      :returns: A list of photons representing the handlers stored in the given directory and its subdirectories.
+      :rtype: :class:`list[Handler]`
+
+      :raises Any exceptions raised by the called :func:`_emit_photon()` method.:
+
+      .. seealso::
+
+         :func:`_emit_photon()`
+             Loads and returns a photon from a given path.
+
+      .. rubric:: Examples
+
+      >>> loader = Loader()
+      >>> photons = await loader._emit_photons("photons_directory", IPhoton, ["Other_class1", "Other_class2"])
+
+
+   .. py:method:: _absorb_photon(photon, force_stop = False, suppress_finalizer_log = False)
+      :async:
+
+      ``|coro|``
+
+      Stops the specified photon and removes it from the loader's photon registry.
+      If the given photon is a string, it is looked up in the registry by filepath.
+      If the photon is not found, this method returns ``False``.
+
+      :param photon: Either a :class:`Handler` object that represents a running photon, or a :class:`str` name of a photon in the photon registry.
+      :type photon: :class:`Handler|str`
+      :param force_stop: A flag that specifies whether to force-stop the photon if it does not stop within a reasonable time or             does not implement a finalizer.
+      :type force_stop: :class:`bool`
+
+      :returns: Indicating whether the photon was successfully stopped and removed.
+      :rtype: `bool`
+
+
+   .. py:method:: _absorb_photons(photons, force_stop = False)
+      :async:
+
+      ``|coro|``
+
+      Stops and removes a list of photons from the loader's registry.
+      If a given photon is a string, it is looked up in the registry by filepath.
+      The method returns a list of successful photon filepaths that were stopped and absorbed.
+
+      :param photons: A list of :class:`Handler` objects representing photons, or a list of :class:`str`             names of the photons in the photon registry.
+      :type photons: :class:`list[Handler|str]`
+
+      :returns: A list of successful photon filepaths that were stopped and absorbed.
+      :rtype: :class:`list[str]`
+
+
+   .. py:method:: _revert_photon(validated_photon, validated_modules)
+      :async:
+
+      ``|coro|``
+
+      Rolls back a photon to a working state if an atomic reload fails.
+
+      :param validated_photon: A single :class:`Handler` object or a list of :class:`Handler` objects which are validated successfully
+                               during the atomic reload.
+      :type validated_photon: :class:`Union[Handler, List[Handler]]`
+      :param validated_modules: A dictionary containing the validated modules for the given photon.
+                                These modules are updated in the ``sys.modules`` after the photon has been rolled back.
+      :type validated_modules: :class:`Dict[str, ModuleType]`
+
+      :raises Any exception that may occur during the :func:`validated_photon.start()` call.:
+
+      .. rubric:: Notes
+
+      This function is responsible for rolling back a photon to a working state if an atomic reload fails.        It takes two parameters: a validated photon and validated modules dictionary. If the validation passes         successfully, then the :func:`_revert_photon()` function starts the validated photon by calling the        :func:`validated_photon.start()` function. Afterward, the ``_photons`` collection is updated to hold the         working photon, and updated modules are passed to the ``sys.modules`` by the :func:`sys.modules.update()` call.
+
+      This function expects the provided ``validated_photon`` to be a single :class:`Handler` object or a list of such objects.        It is also expected that the provided ``validated_photon`` has passed the validation check without any errors.
+
+      - Please note that any exception that is raised during the await :func:`validated_photon.start()` function call        is propagated back to the caller. The exceptions could arise due to coding bugs, configuration issues, or other        environmental reasons.
+
+
+   .. py:method:: _reload_photon(photon)
+      :async:
+
+      ``|coro|``
+
+      Reloads a photon handler or an entire photon atomically and returns the updated :class:`Handler` object(s).
+
+      :param photon: A single handler object or the string name for the photon which needs to be reloaded.
+      :type photon: :class:`Union[Handler, str]`
+
+      :returns:
+
+                - If a single photon is provided, it returns the updated :class:`Handler` object.
+                - If multiple photons are provided or the photon to be reloaded has multiple handlers,
+                - it returns a list of the updated :class:`Handler` objects.
+      :rtype: :class:`Union[Handler, List[Handler]]`
+
+      :raises Any exception that may occur during:: - :func:`self._check_photon()`
+          - :func:`_absorb_photon(validated_photon)`
+          - :func:`_emit_photon(photon)`
+          - :func:`_revert_photon(validated_photon, validated_modules)`
+
+      .. rubric:: Notes
+
+      This function reloads a photon handler or an entire photon atomically and returns the updated :class:`Handler` object(s).        The function starts by validating the provided photon by calling the :func:`_check_photon(photon)` function.        Once the validation is complete, this function collects all the validated modules for the photon across the system.
+
+      Depending on the number of validated photons i.e., whether a single :class:`Handler` object or a list of them is provided,        the function iterates through each of them and collects all validated modules for each.        It then calls the :func:`_absorb_photon(validated_photon)` function to atomically update the photon(s).        After an atomic update of the photon(s), it returns the updated :class:`Handler` object(s) by calling the         :func:`_emit_photon(photon)` function.
+
+      In case any exception occurs during the atomic update,        this function calls the :func:`_revert_photon(validated_photon, validated_modules)`        function to fall back to the previous working state.
+
+      - Please note that any exception that is raised during any defined calls in this function is propagated back to the caller.        The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.
+
+
+   .. py:method:: _reload_photons(photons)
+      :async:
+
+      ``|coro|``
+
+      Reloads a list of photon handlers or entire photons atomically and returns the updated :class:`Handler` objects.
+
+      :param photons: A list of :class:`Handler` objects or the string names for the photons that need to be reloaded.
+      :type photons: :class:`List[Union[Handler, str]]`
+
+      :returns: A list of updated :class:`Handler` objects after the atomic reload process.
+      :rtype: :class:`List[Handler]`
+
+      :raises Any exception that may occur during the :func:`_reload_photon(photon)` call.:
+
+      .. rubric:: Notes
+
+      This function reloads a list of photon handlers or entire photons atomically and returns the updated :class:`Handler`         objects. The function loops through all provided handlers, atomically updates each of them using the previously defined         :func:`_reload_photon(photon)` function, and collects the updated :class:`Handler` objects in a list. If the result of the         :func:`_reload_photon(photon)` function call returns a :class:`list` of :class:`Handler` objects, this function concatenates        them onto the handlers list. If the result of the :func:`_reload_photon(photon)` function call returns a single :class:`Handler`        object, this function appends the single :class:`Handler` object onto the handlers list.
+
+      - Please note that any exception that is raised during the :func:`_reload_photon(photon)` function call is immediately propagated        back to the caller. The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.
+
+
+   .. py:method:: _observe_photons(photons_directory, loop_trace = None)
+      :async:
+
+      ``|coro|``
+
+      Observes photons for changes by continuously calculating their checksum and reloading when a change is detected.
+
+      :param photons_directory: The path to the photons directory which needs to be monitored.
+      :type photons_directory: :class:`str`
+      :param loop_trace: An optional trace object to keep track of loop iterations and allow testing of infinite loops, defaults to ``None``.
+      :type loop_trace: :class:`LoopTrace`
+
+      :returns: The function returns ``True`` when the observer loop has been terminated.
+      :rtype: :class:`bool`
+
+      :raises Any exception that may occur during:: - :func:`self.load_photons(photons_directory)`
+          - :func:`self.reload_photons(photons_to_reload)`
+          - :func:`loop_trace.evalutate_tasks()`
+          - :func:`SystemUtils.continue_async(1)`
+
+      .. rubric:: Notes
+
+      This function observes photons for changes by consistently calculating their checksum and reloading when a change is detected.        The function loops indefinitely until the ``_is_watching`` flag is set to ``False``. The observation process starts by calling        the :func:`load_photons(photons_directory)` function to collect all the available photons. The function then makes a copy of all        the ``_photons``, and then loops through this copy and calculates the current checksum of each photon.
+
+      - If the current photon's checksum is different from the previous checksum value, the photon's filepath is appended to the        ``photons_to_reload`` list.
+      - Once all the photons have been observed, the function checks whether ``photons_to_reload`` has any new entries.        If new entries exist, the function calls the :func:`reload_photons(photons_to_reload)` function to atomically update        the observed photons.
+      - The function then pauses for one second by calling the :func:`SystemUtils.continue_async(1)` function before resuming with the        next cycle. In case the ``loop_trace`` parameter is provided, this function evaluates the provided loop tasks by calling the        :func:`loop_trace.evalutate_tasks()` function.
+      - Please note that any exception that is raised during any defined calls in this function is propagated back to the caller.        The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.
+
+
+   .. py:method:: load_photon(photon_path, photon_base = IPhoton, other_classes = [], recursive = False)
+      :async:
+
+      ``|coro|``
+
+      Loads a photon module from a given path, and initializes a corresponding :class:`Handler` object.        The provided path must be an existing file path to a photon module, and not a directory.        This function takes an optional base class for the photon module, and a list of other class names to be loaded.        If the recursive flag is set to ``True``, this method loads all photon modules recursively from the path.        The method raises a :class:`PhotonNotFoundError` error if the provided path is not found, or if it is a directory.
+
+      :param photon_path: A string representing the path to the photon module file to be loaded.
+      :type photon_path: :class:`str`
+      :param photon_base: An optional base class type for photon modules to be loaded. Defaults to :class:`IPhoton`.
+      :type photon_base: :class:`type`
+      :param other_classes: An optional list of string names of other classes to load from the photon module. Defaults to ``[]``.
+      :type other_classes: :class:`list[str]`
+      :param recursive: A `bool` flag that indicates whether to search for photon modules recursively under the provided path. Defaults to ``False``.
+      :type recursive: :class:`bool`
+
+      :returns: A list of :class:`Handler` objects representing the loaded photons, or an empty list if no photons are loaded successfully.
+      :rtype: :class:`bool`
+
+      :raises PhotonNotFoundError: An error if the provided photon path doesn't exist or is a directory.
+
+      .. rubric:: Examples
+
+      >>> photon = await load_photon("photons/my_photon.py")
+      ... # A photon will then be emitted and ready to start.
+
+
+   .. py:method:: load_photons(photons_directory, photon_base = IPhoton, other_classes = [], recursive = False)
+      :async:
+
+      ``|coro|``
+
+      Loads a directory of photon modules, each module being represented by a corresponding :class:`Handler` object, and         returns a list of :class:`Handler` objects. The provided path must be an existing directory path, and not a file.        This function takes an optional base class for photon modules, and a list of other class names to be loaded.        If the ``recursive`` flag is set to ``True``, all photon modules will be loaded recursively from the directory.
+
+      :param photons_directory: Represents the path to the directory containing the photon modules to be loaded.
+      :type photons_directory: :class:`str`
+      :param photon_base: An optional base class type for photon modules to be loaded. Defaults to :class:`IPhoton`.
+      :type photon_base: Optional[:class:`type`]
+      :param other_classes: An optional list of string names of other classes to load from the photon. Defaults to ``[]``.
+      :type other_classes: Optional[:class:`list[str]`]
+      :param recursive: A flag that indicates whether to search for photon modules recursively under the provided directory path. Defaults to ``False``.
+      :type recursive: Optional[:class:`bool`]
+
+      :returns: A collection of objects representing the loaded photons, or an empty list if no photons were loaded successfully.
+      :rtype: :class:`list[Handler]`
+
+      :raises DirectoryNotFoundError: If the provided photon path doesn't exist, or is a file.
+
+      .. rubric:: Examples
+
+      >>> photons = await load_photons("photons/")
+      ... # A list of photons will then be emitted and ready to start.
+
+
+   .. py:method:: unload_photon(photon, force_stop = False)
+      :async:
+
+      ``|coro|``
+
+      Stops and unloads a specified photon from the loader's photon registry by calling its finalizer, if any,        and disposing unused resources. If the given photon is a string, it is looked up in the registry by filepath.        The method returns a boolean value indicating whether the photon was successfully stopped and unloaded.
+
+      .. important:: Unloading a single photon unloads the entire file from which that photon originated. So, that means all        other photons that may be found within the file as well.
+
+      :param photon: The photon handler object or filepath which represents a running photon to be unloaded.
+      :type photon: :class:`Handler | str`
+      :param force_stop: A flag which allows a photon to be immediately halted and collected without calling its finalizer.
+      :type force_stop: :class:`bool`
+
+      :returns: A flag indicating if the provided photon was unloaded.
+      :rtype: :class:`bool`
+
+      .. rubric:: Examples
+
+      >>> await unload_photon(handler)
+      True
+      >>> await unload_photon('photons/a.py', force_stop=True)
+      True
+
+
+   .. py:method:: unload_photons(photons, force_stop = False)
+      :async:
+
+      ``|coro|``
+
+      Stops and unloads a collection of photons from the loader's photon registry by calling their finalizers, if any,         and disposing unused resources. If a given photon is a string, it is looked up in the registry by filepath.        The function returns a list of filepaths indicating whether the photons were successfully stopped and unloaded.
+
+      .. important:: Unloading any photon unloads the entire file from which that photon originated. So, that means all        other photons that may be found within the file as well.
+
+      :param photons: A list of photon handler objects or filepaths to be unloaded.
+      :type photons: :class:`list[Handler|str]`
+      :param force_stop: A flag which allows a photon to be immediately halted and collected without calling its finalizer.
+      :type force_stop: :class:`bool`
+
+      :returns: A list containing the filepaths of all unloaded photons.
+      :rtype: :class:`list[str]`
+
+      .. rubric:: Examples
+
+      >>> await unload_photons([handler1, handler2])
+      ['photons/a.py', 'photons/a.py']
+      >>> await unload_photons(['photons/a.py', 'photons/b.py'], force_stop=True)
+      ['photons/a.py', 'photons/b.py']
+
+
+   .. py:method:: reload_photon(photon)
+      :async:
+
+      ``|coro|``
+
+      Atomically reloads the specified photon and provides a fresh handler.
+
+      :param photon: The photon handler or filepath of a photon that is to be reloaded.
+      :type photon: :class:`Handler|str`
+
+      :returns: A handler or list of handler objects representing the newly updated photon.
+      :rtype: :class:`Handler|list[Handler]`
+
+      .. rubric:: Notes
+
+      This function makes a copy of both the loader's ``self._photons``,
+      and the related ``sys.modules``. After which the provided photon will
+      be unloaded, loaded again, and then returned as a freshly updated photon
+      :class:`Handler` object. If any errors, in either unloading or loading,
+      all photons will revert to their original states.
+
+      .. rubric:: Examples
+
+      >>> reloaded_handler = await reload_photon(my_photon_handler)
+      ... # A new handler will be created and returned from the original handler object.
+      >>> reloaded_handler = await reload_photon('photons/my_photon.py')
+      ... # A new handler will be created and returned from the provided handler file path.
+
+
+   .. py:method:: reload_photons(photons)
+      :async:
+
+      ``|coro|``
+
+      Atomically reloads the specified photons and provides a list of fresh handlers.
+
+      :returns: A list of handler objects representing the newly updated photons.
+      :rtype: :class:`list[Handler]`
+
+      .. rubric:: Notes
+
+      This function makes a copy of both the loader's ``self._photons``,
+      and the related ``sys.modules``. After which the provided photons will
+      be unloaded, loaded again, and then returned as freshly updated photon
+      :class:`Handler` objects. If any errors, in either unloading or loading,
+      all photons will revert to their original states.
+
+      .. rubric:: Examples
+
+      >>> reloaded_handlers = await reload_photons([my_photon_handler, second_photon_handler])
+      ... # New handlers will be created and returned from the original handler objects.
+      >>> reloaded_handlers = await reload_photons('photons/my_photon.py', 'photons/second_photon.py')
+      ... # New handlers will be created and returned from the provided handler file path.
+
+
+   .. py:method:: watch_photons(photons_directory)
+      :async:
+
+      ``|coro|``
+
+      Creates a thread manager and spawns a new thread to monitor photons in a given directory        for changes and reloads them atomically.
+
+      :param photons_directory: The directory path to the photons folder which needs to be monitored.
+      :type photons_directory: :class:`str`
+
+      :raises TypeError: If the ``photons_directory`` argument is not a string.
+      :raises DirectoryNotFoundError: If the ``photons_directory`` argument is not a valid directory.
+      :raises ThreadManagerAlreadyRunning: If the loader is already monitoring photons.
+
+      .. rubric:: Notes
+
+      - This asynchronous function spawns a thread manager and a new thread to monitor photons in a given directory.
+      - The function starts by validating whether the `photons_directory` argument is a valid directory and of type :class:`str`.
+      - If the `_is_watching` flag is ``True``, the function raises a warning by raising `ThreadManagerAlreadyRunningError`.
+      - Then the function sets the ``_is_watching`` flag to ``True`` and sets the number of allowed threads to one.        The function appends a new thread to the thread manager through the :func:`_start_watching()` callback function.        The thread is then started and runs indefinitely until the ``_is_watching`` flag is set to ``False``.        The wait time between cycles is set to one second by calling the :func:`SystemUtils.continue_async(1)` function.
+      - Please note that this function starts the thread manager and a new thread to monitor photons.         Hence, the thread manager must be stopped by calling the :func:`stop_watching_photons()` function        of the photon :class:`Loader` instance.
+
+
+   .. py:method:: stop_watching_photons(halt_threads = False)
+      :async:
+
+      ``|coro|``
+
+      Stops all threads from watching changes in photons and gracefully stops the thread manager.
+
+      :param halt_threads: An optional boolean flag to halt all running threads immediately without a flag,
+                           instead of gracefully stopping the thread manager, defaults to ``False``.
+      :type halt_threads: Optional[:class:`bool`]
+
+      .. rubric:: Notes
+
+      This asynchronous function stops all threads and gracefully shuts down the thread manager from watching changes in photons.
+
+      - The function starts by setting the ``_is_watching`` flag to ``False``. If ``halt_threads`` is ``True``,        the function calls the :func:`halt()` function of the thread manager instance to stop all running threads immediately.        If ``halt_threads`` is ``False``, the function calls the :func:`stop()` function to gracefully stop all threads.
+      - To prevent memory leaks and other issues, it is recommended to stop any running threads gracefully        instead of abruptly halting or killing them. In most cases, setting ``halt_threads`` to ``False`` is preferred to ensure        a graceful shutdown of all threads.
+
+
+

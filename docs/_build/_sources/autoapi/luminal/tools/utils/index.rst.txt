@@ -1,0 +1,192 @@
+:py:mod:`luminal.tools.utils`
+=============================
+
+.. py:module:: luminal.tools.utils
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.tools.utils.SystemUtils
+   luminal.tools.utils.TextUtils
+
+
+
+
+.. py:class:: SystemUtils
+
+
+   Encapsulation of common operating system utilities.
+
+   .. py:attribute:: windows
+      :value: 'nt'
+
+      
+
+   .. py:attribute:: linux
+      :value: 'posix'
+
+      
+
+   .. py:attribute:: macos
+      :value: 'posix'
+
+      
+
+   .. py:attribute:: cygwin
+      :value: 'posix'
+
+      
+
+   .. py:method:: get_system()
+      :staticmethod:
+
+      Returns the name of the currently running operating system.
+
+      :returns: The name of the current system type.
+      :rtype: :class:`str`
+
+
+   .. py:method:: get_system_delimiter()
+      :staticmethod:
+
+      Returns a delimiter character which is appropriate for the current operating system.
+
+      :returns: The delimiter used during parsing and concatenation of strings.
+      :rtype: :class:`str`
+
+
+   .. py:method:: get_line(filepath)
+      :staticmethod:
+
+      Returns the first line of a provided file in a read-only fashion.
+
+      :param filepath: The path of the file to read a line.
+      :type filepath: :class:`str`
+
+      :raises IOError: The file could not be opened or modified.
+      :raises Exception: The file could not be written in general.
+
+      :returns: The line that was read from the file.
+      :rtype: :class:`str`
+
+
+   .. py:method:: read_from_file(filepath)
+      :staticmethod:
+
+      Returns all data of a provided file in a read-only fashion.
+
+      :param filepath: The path of the file to read.
+      :type filepath: :class:`str`
+
+      :raises IOError: The file could not be opened or modified.
+      :raises Exception: The file could not be written in general.
+
+      :returns: Data that was read from the file.
+      :rtype: :class:`str`
+
+
+   .. py:method:: write_to_file(filepath, data)
+      :staticmethod:
+
+      Writes all data to the provided file in a truncated fashion.
+
+      :param filepath: The path of the file to write.
+      :type filepath: :class:`str`
+      :param data: The data to be written to the file.
+      :type data: :class:`str`
+
+      :raises IOError: The file could not be opened or modified.
+      :raises Exception: The file could not be written in general.
+
+      :returns: The return value of the :func:`open.write()` function.
+      :rtype: :class:`int`
+
+
+   .. py:method:: get_file_checksum(filename, block = 2**20)
+      :staticmethod:
+
+      Generates a calculated ``SHA512`` hash for a given file.
+
+      :param filename: The name of the file to generate the checksum for.
+      :type filename: :class:`str`
+      :param block: Chunk size to read and hash the file in bytes. Default is ``2^20``.
+      :type block: Optional[:class:`int`]
+
+      :returns: The calculated ``SHA512`` hash of the file, or ``None`` if there was an error generating the checksum.
+      :rtype: :class:`str`
+
+      .. rubric:: Notes
+
+      - This function generates a ``SHA512`` hash for a given file by reading the file in blocks and hashing each block.        The generated hash is a digest checksum (a unique fixed-sized representation of the file content).        The file is treated as a binary file (read in ``rb`` mode) for proper handling of all types of files.
+
+      - The reason ``SHA512`` was chosen is purely for the lack of collisions at runtime when performing dynamic checks.
+
+
+   .. py:method:: is_submodule(parent, child)
+      :staticmethod:
+
+      Returns a flag if the compared child module is from the parent
+      and contains a ``{parent}.{child}`` path structure.
+
+      :param parent: The path of the original parent sys module.
+      :type parent: :class:`str`
+      :param child: The path of the child sys module.
+      :type child: :class:`str`
+
+      :returns: A flag determining if the child is a submodule of the parent module.
+      :rtype: :class:`bool`
+
+
+   .. py:method:: continue_async(delay = sys.float_info.min)
+      :staticmethod:
+      :async:
+
+      ``|coro|``
+
+      Sleeps the thread for the least possible amount of time for the system
+      in order to allow a function to be truly async and awaitable; or a
+      specified time delay in seconds.
+
+      :param delay: The amount of time to sleep the thread.
+      :type delay: Optional[:class:`float`]
+
+
+
+.. py:class:: TextUtils
+
+
+   Contains a collection of text generation utilities such as random id and cid strings.
+
+   .. py:method:: generate_id(length = 10, use_sample = False)
+      :staticmethod:
+
+      Returns an alphanumeric identifier based on a given length and random sampling, if desired.
+
+      :param length: The length of the identifier to be generated.
+      :type length: Optional[:class:`int`]
+      :param use_sample: Use :func:`random.sample()` instead of :func:`secrets.choice()` on available characters.
+      :type use_sample: Optional[:class:`bool`]
+
+      :returns: The generated id of a specified length.
+      :rtype: :class:`str`
+
+
+   .. py:method:: generate_cid(length = 64)
+      :staticmethod:
+
+      Returns a Base64 encoded cryptographically strong random identifier.
+
+      :param length: The length of the identifier to be generated.
+      :type length: Optional[:class:`int`]
+
+      :returns: The generated cryptographic id of a specified length.
+      :rtype: :class:`str`
+
+
+

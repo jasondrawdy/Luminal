@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.managers.threads &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.managers.tracer" href="../tracer/index.html" />
+    <link rel="prev" title="luminal.managers.resolver" href="../resolver/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/metadata/index.html">metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/photon/index.html">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../handler/index.html">handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader/index.html">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resolver/index.html">resolver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">threads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracer/index.html">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/system/index.html">system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/threads/index.html">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.threads</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.managers.threads">
+<span id="luminal-managers-threads"></span><h1><a class="reference internal" href="#module-luminal.managers.threads" title="luminal.managers.threads"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.threads</span></code></a><a class="headerlink" href="#module-luminal.managers.threads" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TracedThread</span></code></a></p></td>
+<td><p>Custom thread object that can be halted using the <code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code> function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThreadManager</span></code></a></p></td>
+<td><p>A class for managing multiple threads in a codebase.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TracedThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">keywords</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Thread" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threading.Thread</span></code></a></p>
+<p>Custom thread object that can be halted using the <a class="reference internal" href="#luminal.managers.threads.TracedThread.halt" title="luminal.managers.threads.TracedThread.halt"><code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code></a> function.</p>
+<p>This thread type extends the functionality of the standard <a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Thread" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></a> class to allow for the    thread execution to be halted using the <a class="reference internal" href="#luminal.managers.threads.TracedThread.halt" title="luminal.managers.threads.TracedThread.halt"><code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code></a> function. Once halted, the thread will immediately stop    execution and expose any underlying pipes. This can be useful for debugging or other similar tasks.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This thread type is best utilized for small tasks that can be daemonized or terminated quickly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – </p></li>
+<li><p><strong>keywords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread.__run">
+<span class="sig-name descname"><span class="pre">__run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread.__run" title="Permalink to this definition"></a></dt>
+<dd><p>The control function for the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> that sets the global trace function and executes the thread’s main function.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This method is used to run the code in the thread, but with a global trace function set beforehand.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">globaltrace</span></code> attribute, set previously by the user, is set as the current trace function at runtime.</p></li>
+<li><p>The previous <code class="xref py py-func docutils literal notranslate"><span class="pre">__run_backup()</span></code> method, i.e. the original hardcoded run method, is called here to execute the        thread’s main function.</p></li>
+<li><p>The second to last line overwrites the <code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code> method with the original method, effectively undoing any trace        function set previously.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread.start" title="Permalink to this definition"></a></dt>
+<dd><p>Starts the thread execution by invoking the <code class="xref py py-func docutils literal notranslate"><span class="pre">Thread.start()</span></code> method, but not before setting the appropriate run method.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This method overrides the <code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code> method and replaces it with the <a class="reference internal" href="#luminal.managers.threads.TracedThread.__run" title="luminal.managers.threads.TracedThread.__run"><code class="xref py py-func docutils literal notranslate"><span class="pre">__run()</span></code></a> method, which sets the global trace        function and executes the thread’s main function.</p></li>
+<li><p>The original run method is saved into the <code class="docutils literal notranslate"><span class="pre">__run_backup</span></code> attribute before it is swapped out.</p></li>
+<li><p>Finally, the <code class="xref py py-func docutils literal notranslate"><span class="pre">threading.Thread.start()</span></code> method is called on the thread object itself to actually start the        execution of the code.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread.globaltrace">
+<span class="sig-name descname"><span class="pre">globaltrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread.globaltrace" title="Permalink to this definition"></a></dt>
+<dd><p>The global trace function for a <code class="docutils literal notranslate"><span class="pre">TracedThread</span></code> that replaces the default function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Any</span></code>) – The current thread frame.</p></li>
+<li><p><strong>event</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Any</span></code>) – The event type (e.g. ‘call’, ‘line’, ‘return’, ‘exception’).</p></li>
+<li><p><strong>arg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Any</span></code>) – Event-specific arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the event type is <code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">self.localtrace</span></code> is returned, otherwise <code class="xref py py-class docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">self.localtrace</span></code>]</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This method serves as the global trace function for the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> class.</p></li>
+<li><p>If the event type is <code class="docutils literal notranslate"><span class="pre">call</span></code>, the trace function switches to <code class="docutils literal notranslate"><span class="pre">self.localtrace</span></code> which handles the local        tracing inside the thread in a context-specific manner.</p></li>
+<li><p>If another event type is detected, <code class="xref py py-class docutils literal notranslate"><span class="pre">None</span></code> is returned as there’s no further action required.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread.localtrace">
+<span class="sig-name descname"><span class="pre">localtrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread.localtrace" title="Permalink to this definition"></a></dt>
+<dd><p>Trace function for the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">types.FrameType</span></code>) – The current frame being executed in the thread.</p></li>
+<li><p><strong>event</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The event that occurred in the thread during tracing.</p></li>
+<li><p><strong>arg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Any</span></code>) – Optional argument associated with the event.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The next trace function to be called or <code class="xref py py-class docutils literal notranslate"><span class="pre">None</span></code> to stop tracing.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SystemExit:</strong> – If the thread is halted and the event is line, the program is forcefully terminated.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function can be registered as a trace function on a thread using <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.settrace" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.settrace()</span></code></a>.        It is called every time an event is encountered in the traced thread and returns the next        trace function to be called. If the thread is halted and the event is line, it raises a        <code class="docutils literal notranslate"><span class="pre">SystemExit</span></code> exception to stop the thread execution.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.TracedThread.halt">
+<span class="sig-name descname"><span class="pre">halt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.TracedThread.halt" title="Permalink to this definition"></a></dt>
+<dd><p>Halt function for the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> class.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function sets the <code class="docutils literal notranslate"><span class="pre">halted</span></code> attribute of the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> instance to <code class="docutils literal notranslate"><span class="pre">True</span></code>, indicating that        the thread should be paused for debugging or other purposes. Once halted, the thread will stop        executing at the next available opportunity in its trace function.</p></li>
+<li><p>This function is intended to be used in combination with the <a class="reference internal" href="#luminal.managers.threads.TracedThread.localtrace" title="luminal.managers.threads.TracedThread.localtrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">localtrace()</span></code></a> and <a class="reference internal" href="#luminal.managers.threads.TracedThread.globaltrace" title="luminal.managers.threads.TracedThread.globaltrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">globaltrace()</span></code></a> methods        from the <code class="docutils literal notranslate"><span class="pre">sys</span></code> module, where the former is registered as a trace function for a thread to halt the        thread at a specific point, and the latter is used to globally manipulate the trace function of        all threads in the running Python process.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ThreadManager</span></span><a class="headerlink" href="#luminal.managers.threads.ThreadManager" title="Permalink to this definition"></a></dt>
+<dd><p>A class for managing multiple threads in a codebase.</p>
+<p>This class provides functionality for managing and controlling the execution of multiple threads in a
+program. It maintains a list of running and requested threads, a flag to stop all threads gracefully,
+and settings for running threads based on given limits.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager._generate_uid">
+<span class="sig-name descname"><span class="pre">_generate_uid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager._generate_uid" title="Permalink to this definition"></a></dt>
+<dd><p>Generates a unique identifier for the instance of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The delimiter to use for concatenating the string chunks. Defaults to the <cite>-</cite> character.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A unique identifier for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function generates a unique identifier for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance, based on a randomly generated        alphanumeric string. However, it splits the string into six equal chunks and concatenates them with the delimiter        to create the final UID.</p></li>
+<li><p>This function is primarily intended for internal use by the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class to generate a unique        identifier for each instance. It can be called by other methods within the class to ensure that the        identifier is unique and consistent for each instance.</p></li>
+<li><p>Note that the delimiter argument can be customized to fit the specific needs of the program or application,        but it is recommended that a standard delimiter such as <code class="docutils literal notranslate"><span class="pre">-</span></code> or <code class="docutils literal notranslate"><span class="pre">_</span></code> be used to ensure portability and        compatibility with other systems.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager._clean_threads">
+<span class="sig-name descname"><span class="pre">_clean_threads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager._clean_threads" title="Permalink to this definition"></a></dt>
+<dd><p>Cleans up the list of running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p>
+<p>This function removes completed threads from the <code class="docutils literal notranslate"><span class="pre">_running_threads</span></code> collection of a <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.
+It does so by creating a copy of <code class="docutils literal notranslate"><span class="pre">_running_threads</span></code>, looping through it to find completed threads and
+clears them from the original dictionary.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function is intended for internal use by the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class to clean up the list of running        threads after they have finished executing. It should be called regularly to prevent the running thread        list from growing too large and potentially causing memory issues.</p></li>
+<li><p>The function works by creating a shallow copy of the running threads dictionary to ensure that the        original dictionary is not modified during iteration, which can cause unexpected behavior. If a thread        is found to have finished executing, it is removed from the running threads dictionary to keep the list        up to date.</p></li>
+<li><p>Note that this function does not stop or halt any individual threads; it simply removes finished threads        from the list of running threads. Any necessary cleanup or stopping of threads should be handled by other        methods or functions within the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager._stop_threads">
+<span class="sig-name descname"><span class="pre">_stop_threads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager._stop_threads" title="Permalink to this definition"></a></dt>
+<dd><p>Stops all running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p>
+<p>This function iterates over the list of running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance and stops each        thread using the <a class="reference internal" href="#luminal.managers.threads.ThreadManager.halt" title="luminal.managers.threads.ThreadManager.halt"><code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code></a> function of the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> class. It then waits for each stopped thread to        complete using the <code class="xref py py-func docutils literal notranslate"><span class="pre">join()</span></code> function before cleaning up the list of running threads.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Invoking the <a class="reference internal" href="#luminal.managers.threads.ThreadManager.halt" title="luminal.managers.threads.ThreadManager.halt"><code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code></a> function on a <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> instance may cause the thread to stop executing        immediately, so it should be used with caution. Additionally, any necessary cleanup or stopping of threads        should be handled by other methods or functions within the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class.</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function is intended for internal use by the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> class to stop all running threads in        a program abrubtly. It should be called when the user requests to stop all threads, or when the        program is about to exit.</p></li>
+<li><p>The function works by creating a shallow copy of the running threads dictionary to ensure that the        original dictionary is not modified during iteration, which can cause unexpected behavior. For each        running thread, the function checks if it is still alive, and if so, halts the thread using the <a class="reference internal" href="#luminal.managers.threads.ThreadManager.halt" title="luminal.managers.threads.ThreadManager.halt"><code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code></a>        function of the <a class="reference internal" href="#luminal.managers.threads.TracedThread" title="luminal.managers.threads.TracedThread"><code class="xref py py-class docutils literal notranslate"><span class="pre">TracedThread</span></code></a> class. It then waits for the thread to complete halting using the        <code class="xref py py-func docutils literal notranslate"><span class="pre">join()</span></code> function before cleaning up the list of running threads.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager._start_threads">
+<span class="sig-name descname"><span class="pre">_start_threads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watching_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager._start_threads" title="Permalink to this definition"></a></dt>
+<dd><p>Starts threads requested in the queue for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>watching_threads</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the method will check every so often to see if any new threads have been appended to the queue. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>NoThreadsFoundError:</strong> – Raised when there are no threads ready to run in the queue.</p></li>
+<li><p><strong>ThreadLimitReachedError:</strong> – Raised when the maximum number of threads allowed to run in the calling <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance has been reached.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">_requested_threads</span></code> collection is used to keep track of which threads in the queue need to be executed. The method        checks to see if any of the requested threads can be run when the thread limit of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> is not exceeded. Thread limit        is determined by the <code class="docutils literal notranslate"><span class="pre">thread_limit</span></code> of the calling <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p></li>
+<li><p>If there are no threads in the queue, a <code class="xref py py-class docutils literal notranslate"><span class="pre">NoThreadsFoundError</span></code> is raised. If the maximum number of threads allowed to run        in the calling instance has been reached, a <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadLimitReachedError</span></code> is raised. Once a thread has been started, it is added to the        <code class="docutils literal notranslate"><span class="pre">_running_threads</span></code> attribute so it can be tracked.</p></li>
+<li><p>If a thread has already been registered as running but is still in the queue, it is removed so that it doesn’t get executed twice.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager.append_thread">
+<span class="sig-name descname"><span class="pre">append_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager.append_thread" title="Permalink to this definition"></a></dt>
+<dd><p>Appends a thread to the request queue for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>) – The callable function to be executed.</p></li>
+<li><p><strong>args</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>]) – A tuple of positional arguments to be passed into the function when executed. Defaults to <cite>()</cite>.</p></li>
+<li><p><strong>kwargs</strong> (Optional(<code class="xref py py-class docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>]) – A dictionary of keyword arguments to be passed into the function when executed. Defaults to <cite>{}</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>True</cite> if the thread was successfully appended to the queue, <cite>False</cite> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">_requested_threads</span></code> collection is used to keep track of which threads can be executed when thread execution is started        in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance. Each thread is represented as a tuple that contains <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>        attributes, respectively. The <code class="docutils literal notranslate"><span class="pre">function</span></code> is the callable object that will be executed when the thread is run, while        the <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are arguments that will be passed into the <code class="docutils literal notranslate"><span class="pre">function</span></code> once executed.</p></li>
+<li><p>The method returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the thread was added to the queue successfully and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise. An exception catch        is implemented in case there is an error in creating the thread. If the <a class="reference internal" href="#luminal.managers.threads.ThreadManager._generate_uid" title="luminal.managers.threads.ThreadManager._generate_uid"><code class="xref py py-func docutils literal notranslate"><span class="pre">_generate_uid()</span></code></a> method raises an exception,        <code class="docutils literal notranslate"><span class="pre">False</span></code> is returned as the thread could not be added to the queue.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager.stop" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the <cite>_flag_request</cite> attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>, a signal that stops all running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object.</p>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_flag_request</span></code> attribute is a boolean flag that is used to indicate if there is a stop request from the        <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object. When <code class="docutils literal notranslate"><span class="pre">_flag_request</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, all running threads are stopped. This method sets the        value of this attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code> and does not return any value. Once this is done, the <code class="xref py py-func docutils literal notranslate"><span class="pre">stop_listening()</span></code> method        is called by the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object so that all the threads that are currently running can terminate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager.halt">
+<span class="sig-name descname"><span class="pre">halt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager.halt" title="Permalink to this definition"></a></dt>
+<dd><p>Halts all running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object.</p>
+<p class="rubric">Notes</p>
+<p>This method is used to stop (halt) all running threads in the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object instance. The method achieves this        by calling the <a class="reference internal" href="#luminal.managers.threads.ThreadManager._stop_threads" title="luminal.managers.threads.ThreadManager._stop_threads"><code class="xref py py-func docutils literal notranslate"><span class="pre">_stop_threads()</span></code></a> method of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object which terminates all running threads. After this        method is called, the <code class="docutils literal notranslate"><span class="pre">_running_threads</span></code> collection of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> is set to an empty dictionary. The method does        not return anything.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager.run" title="Permalink to this definition"></a></dt>
+<dd><p>Starts all threads in the queue for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../errors/threads/index.html#luminal.errors.threads.ThreadsAlreadyRunningError" title="luminal.errors.threads.ThreadsAlreadyRunningError"><strong>ThreadsAlreadyRunningError</strong></a> – Raised when new threads have already been started and are currently running.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method is used to start all threads that are in the <code class="docutils literal notranslate"><span class="pre">_requested_threads</span></code> collection of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object        instance. The method calls the <a class="reference internal" href="#luminal.managers.threads.ThreadManager._start_threads" title="luminal.managers.threads.ThreadManager._start_threads"><code class="xref py py-func docutils literal notranslate"><span class="pre">_start_threads()</span></code></a> function of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object, and attempts to start all        pending threads in the queue. The function raises a <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadsAlreadyRunningError</span></code> if new threads have already been started and        are currently running to avoid starting new threads on top of already running threads.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.threads.ThreadManager.watch">
+<span class="sig-name descname"><span class="pre">watch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.threads.ThreadManager.watch" title="Permalink to this definition"></a></dt>
+<dd><p>Starts a background thread that continuously starts all threads in the request queue for the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../errors/threads/index.html#luminal.errors.threads.ThreadManagerAlreadyRunningError" title="luminal.errors.threads.ThreadManagerAlreadyRunningError"><strong>ThreadManagerAlreadyRunningError</strong></a> – Raised when a manager has already been spawned and is currently watching for threads to start.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method starts a parent background thread that continuously tries to start child threads that are in the <code class="docutils literal notranslate"><span class="pre">_requested_threads</span></code>
+collection of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object. The method raises a <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManagerAlreadyRunningError</span></code> if a manager has already
+been spawned and is currently watching for threads to start. It avoids starting new threads on top of already running threads too.</p>
+<ul class="simple">
+<li><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">_watch()</span></code> function tries to start any pending threads by calling <code class="xref py py-func docutils literal notranslate"><span class="pre">_start_threads(watching_threads=True)()</span></code>.</p></li>
+<li><p>If the thread limit is reached, a <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadLimitReachedError</span></code> exception is caught and then the <a class="reference internal" href="#luminal.managers.threads.ThreadManager._clean_threads" title="luminal.managers.threads.ThreadManager._clean_threads"><code class="xref py py-func docutils literal notranslate"><span class="pre">_clean_threads()</span></code></a> method        is called to cleanup/shutdown any inactive threads. If any other exception occurs, it will be raised except if the        exception message starts with <code class="docutils literal notranslate"><span class="pre">&quot;Thread</span> <span class="pre">limit&quot;</span></code>. In this case, <a class="reference internal" href="#luminal.managers.threads.ThreadManager._clean_threads" title="luminal.managers.threads.ThreadManager._clean_threads"><code class="xref py py-func docutils literal notranslate"><span class="pre">_clean_threads()</span></code></a> is called to cleanup inactive threads.</p></li>
+</ul>
+<p>In conclusion, the method adds the new thread that it starts to the <code class="docutils literal notranslate"><span class="pre">_running_threads</span></code> attribute of the <a class="reference internal" href="#luminal.managers.threads.ThreadManager" title="luminal.managers.threads.ThreadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadManager</span></code></a> object,
+as well as to the <code class="docutils literal notranslate"><span class="pre">_requested_threads</span></code> collection. The method also sets the <code class="docutils literal notranslate"><span class="pre">_currently_watching</span></code> flag to <code class="docutils literal notranslate"><span class="pre">True</span></code>. This will prevent
+subsequent calls to this method if <code class="docutils literal notranslate"><span class="pre">_currently_watching</span></code> is already <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../resolver/index.html" class="btn btn-neutral float-left" title="luminal.managers.resolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tracer/index.html" class="btn btn-neutral float-right" title="luminal.managers.tracer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

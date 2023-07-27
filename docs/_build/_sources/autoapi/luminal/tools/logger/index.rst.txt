@@ -1,0 +1,140 @@
+:py:mod:`luminal.tools.logger`
+==============================
+
+.. py:module:: luminal.tools.logger
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   luminal.tools.logger.Logger
+
+
+
+
+.. py:class:: Logger(module_name, allow_same_message = False)
+
+
+   Bases: :py:obj:`object`
+
+   Logging class with a high degree of customization.
+
+   .. py:class:: Verbosity
+
+
+      Encapsulates the varying degrees of logging output detail.
+
+      .. py:attribute:: low
+         :type: int
+         :value: 0
+
+         
+
+      .. py:attribute:: default
+         :type: int
+         :value: 1
+
+         
+
+      .. py:attribute:: high
+         :type: int
+         :value: 2
+
+         
+
+      .. py:attribute:: debug
+         :type: int
+         :value: 3
+
+         
+
+
+   .. py:method:: _print(message)
+
+      Prints the provided message while also checking if duplicates are allowed or not.
+
+      :param message: A tuple containing the original message and the message to be printed to the console.
+      :type message: :class:`tuple[str, str]`
+
+      .. rubric:: Notes
+
+      The original message is used to compare the last printed message and to prevent the logger
+      from spamming the console or whichever IO stream has been provided.
+
+
+   .. py:method:: info(message, print_output = True)
+
+      Displays a non-critical information based message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: note(message, print_output = True)
+
+      Displays a note-worthy information based message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: success(message, print_output = True)
+
+      Displays a success message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: warning(message, print_output = True)
+
+      Displays a warning message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: error(message, print_output = True)
+
+      Displays an error based message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: private(message, print_output = True)
+
+      Displays a private based message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+   .. py:method:: debug(message, print_output = True)
+
+      Displays a debug based message to the console.
+
+      :param message: The message to log to the local system.
+      :type message: :class:`str`
+      :param print_output: A boolean, ``True`` for printing the message to the console, or ``False`` if not.
+      :type print_output: Optional[:class:`bool`]
+
+
+

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.managers.loader &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.managers.resolver" href="../resolver/index.html" />
+    <link rel="prev" title="luminal.managers.handler" href="../handler/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/metadata/index.html">metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/photon/index.html">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../handler/index.html">handler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resolver/index.html">resolver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../threads/index.html">threads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracer/index.html">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/system/index.html">system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/threads/index.html">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.loader</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.managers.loader">
+<span id="luminal-managers-loader"></span><h1><a class="reference internal" href="#module-luminal.managers.loader" title="luminal.managers.loader"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.loader</span></code></a><a class="headerlink" href="#module-luminal.managers.loader" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#luminal.managers.loader.Loader" title="luminal.managers.loader.Loader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Loader</span></code></a></p></td>
+<td><p>Allows management of photons and how they are loaded, unloaded, reloaded, and monitored.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppress_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader" title="Permalink to this definition"></a></dt>
+<dd><p>Allows management of photons and how they are loaded, unloaded, reloaded, and monitored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logging</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+<li><p><strong>suppress_errors</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.photons">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">photons</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../handler/index.html#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><span class="pre">luminal.managers.handler.Handler</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#luminal.managers.loader.Loader.photons" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a dictionary of photon names and corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing photon names as keys and their corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects as values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Handler]</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This is a read-only property, meaning that it can only be accessed and not modified.</p></li>
+<li><p>The photon name is the name assigned to the photon instance in its definition.</p></li>
+<li><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects contain information about the photon, including its name, file path,        and the <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code> based class itself.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._validate_module">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_validate_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imported_module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._validate_module" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Checks for all photon instances, specified classes and creates handlers objects for them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imported_module</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleType</span></code>) – The imported module to be validated.</p></li>
+<li><p><strong>photon_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The absolute path of the photon module.</p></li>
+<li><p><strong>photon_base</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>) – The base class that all photons of the system will inherit from.</p></li>
+<li><p><strong>other_classes</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code>]) – A list of additional classes to check for in the imported module.
+Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the module is a valid photon module, a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects that correspond
+to the photon instances and specified classes in the module is returned. If it is not a valid photon module,
+returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Union[List[Handler],</span> <span class="pre">bool]</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Even if the module is not a valid photon module and it returns <code class="docutils literal notranslate"><span class="pre">False</span></code>, the <code class="docutils literal notranslate"><span class="pre">imported_module</span></code> will still be        deleted from the system.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._import_module">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_import_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._import_module" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Resolves, executes, and returns a Python module based on the provided module path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The absolute path of the module to be imported.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The imported module object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleType</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ModuleNotFoundError" title="(in Python v3.11)"><strong>ModuleNotFoundError</strong></a> – If the module cannot be found (either due to an incorrect path or it not existing), or
+if a loader or spec cannot be found for the module.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The imported module is added to the <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code> dictionary for future reference, and is also returned.</p></li>
+<li><p>If an error occurs while importing the module and the logging property is set, the error will be logged.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">suppress_errors</span></code> is set, the error will be skipped.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._scan_module">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_scan_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._scan_module" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Determines if the provided path is a package or module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Absolute path of the file or directory to be checked.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the absolute path of the module, a flag indicating whether the
+path is a package, and a flag indicating if there are only packages in the directory.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple[str,</span> <span class="pre">bool,</span> <span class="pre">bool]</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ModuleNotFoundError" title="(in Python v3.11)"><strong>ModuleNotFoundError</strong></a> – If the file path provided does not exist, is not accessible or is not a valid photon.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The first element, <code class="docutils literal notranslate"><span class="pre">path</span></code> in the tuple returned represents the absolute path of the individual module.</p></li>
+<li><p>The second element, <code class="docutils literal notranslate"><span class="pre">is_dir</span></code> in the tuple returned is a boolean value that indicates whether the module        is in fact a package.</p></li>
+<li><p>The third element of the returned tuple, <code class="docutils literal notranslate"><span class="pre">packages_only</span></code> is a boolean value that indicates whether there        are only packages in the directory.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._find_modules">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_find_modules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._find_modules" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Creates a collection of module paths and determines if they’re packages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The path of the directory containing the modules.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing a list of tuples representing available modules
+and if they’re Python packages, and a boolean representing if there are only packages.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple[List[Tuple[str,</span> <span class="pre">bool]],</span> <span class="pre">bool]</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">path</span></code> is not a valid directory or cannot be accessed, an empty list will be returned.</p></li>
+<li><p>The first element, <code class="docutils literal notranslate"><span class="pre">module_path</span></code> in the tuple returned represents the absolute path of the individual module.</p></li>
+<li><p>The second element, <code class="docutils literal notranslate"><span class="pre">is_dir</span></code> in the tuple returned is a boolean value that indicates whether the module        is in fact a package.</p></li>
+<li><p>The second element of the returned tuple, <code class="docutils literal notranslate"><span class="pre">packages_only</span></code> is a boolean value that indicates whether there        are only packages in the directory.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._check_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_check_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._check_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Check if the photon belongs to the available photon registry and return the corresponding handler(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str|Handler</span></code>) – Name of the photon or <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If photon exists in the available photons, return the corresponding handler(s).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Union[Handler,</span> <span class="pre">List[Handler],</span> <span class="pre">None]</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>PhotonNotFoundError:</strong> – If photon is not a valid file path or if it does not exist in the available photons.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If photon is a <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object, return it as is. If photon does not exist in the        available photons, return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._emit_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_emit_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IPhoton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._emit_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Loads and returns a photon from a given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">tuple[str,</span> <span class="pre">bool,</span> <span class="pre">bool]</span></code>) – A string representing the file path of the photon or a tuple representing the photon path along with boolean values indicating if the photon is a module or a package.</p></li>
+<li><p><strong>photon_base</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>]) – Base class for photons. Default is <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code>.</p></li>
+<li><p><strong>other_classes</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code>]) – List of classes that the photon should inherit from. Default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>recursive</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – A flag indicating whether to look for photons recursively in subdirectories under the <code class="docutils literal notranslate"><span class="pre">photons_directory</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handler object of the photon that was emitted, a list of handler objects of photons that were emitted, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span> <span class="pre">|</span> <span class="pre">list[Handler]</span> <span class="pre">|</span> <span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ModuleNotFoundError" title="(in Python v3.11)"><strong>ModuleNotFoundError</strong></a> – When the photon’s module is not found.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><strong>Exception</strong></a> – Generally when a photon author has syntax errors or other issues with their photon source.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="#luminal.managers.loader.Loader._emit_photon" title="luminal.managers.loader.Loader._emit_photon"><code class="xref py py-func docutils literal notranslate"><span class="pre">_emit_photon()</span></code></a> function first initializes an empty list called photons. It then checks whether the given path is a module        file or a package directory by checking if the type of <code class="docutils literal notranslate"><span class="pre">photon_path</span></code> is a tuple. If so, it retrieves the information about the path’s        readiness, the module path, and whether the specified path contains only packages. If the photon is a package and the recursive flag        is <code class="docutils literal notranslate"><span class="pre">True</span></code> or the <code class="docutils literal notranslate"><span class="pre">package_only</span></code> flag is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the function reads photons from other levels down in the package.</p></li>
+<li><p>It then checks if the photon has already been loaded by resolving the module path and accessing the <code class="docutils literal notranslate"><span class="pre">_photons</span></code> attribute of the instance        of <a class="reference internal" href="#luminal.managers.loader.Loader" title="luminal.managers.loader.Loader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code></a>. If the photon is already loaded, a warning message is logged, and <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p></li>
+<li><p>If the photon is not loaded, then the function imports the photon’s module path using the <a class="reference internal" href="#luminal.managers.loader.Loader._import_module" title="luminal.managers.loader.Loader._import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">_import_module()</span></code></a> method, and validates the        module with the given photon base class and a list of other classes the photon should inherit from using the <a class="reference internal" href="#luminal.managers.loader.Loader._validate_module" title="luminal.managers.loader.Loader._validate_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">_validate_module()</span></code></a> method.</p></li>
+<li><p>It returns a list of photons that were validated. If the list of photons is empty, a warning message is logged, and <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.        Otherwise, a success message is logged for loading the photon, and the photons are added to the list.</p></li>
+<li><p>Finally, the function returns a list of handler objects for the loaded photons.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">photon</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loader</span><span class="o">.</span><span class="n">_emit_photon</span><span class="p">(</span><span class="s1">&#39;photons/hello_world.py&#39;</span><span class="p">,</span> <span class="n">IPhoton</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Other_class1&quot;</span><span class="p">,</span> <span class="s2">&quot;Other_class2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._emit_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_emit_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IPhoton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._emit_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Retrieves photon handlers from a specified directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photons_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A string representing the directory where the photons are located.</p></li>
+<li><p><strong>photon_base</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>]) – An optional argument representing the base class for the photons. Default is <cite>IPhoton</cite>.</p></li>
+<li><p><strong>other_classes</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code>]) – List of strings representing other classes that the photons should inherit from. Default is <code class="xref py py-class docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>recursive</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – A boolean indicating whether to look for photons recursively in subdirectories under <cite>photons_directory</cite>. Default is <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of photons representing the handlers stored in the given directory and its subdirectories.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list[Handler]</span></code></p>
+</dd>
+</dl>
+<p>:raises Any exceptions raised by the called <a class="reference internal" href="#luminal.managers.loader.Loader._emit_photon" title="luminal.managers.loader.Loader._emit_photon"><code class="xref py py-func docutils literal notranslate"><span class="pre">_emit_photon()</span></code></a> method.:</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#luminal.managers.loader.Loader._emit_photon" title="luminal.managers.loader.Loader._emit_photon"><code class="xref py py-func docutils literal notranslate"><span class="pre">_emit_photon()</span></code></a></dt><dd><p>Loads and returns a photon from a given path.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">photons</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loader</span><span class="o">.</span><span class="n">_emit_photons</span><span class="p">(</span><span class="s2">&quot;photons_directory&quot;</span><span class="p">,</span> <span class="n">IPhoton</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Other_class1&quot;</span><span class="p">,</span> <span class="s2">&quot;Other_class2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._absorb_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_absorb_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppress_finalizer_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._absorb_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Stops the specified photon and removes it from the loader’s photon registry.
+If the given photon is a string, it is looked up in the registry by filepath.
+If the photon is not found, this method returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler|str</span></code>) – Either a <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object that represents a running photon, or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> name of a photon in the photon registry.</p></li>
+<li><p><strong>force_stop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – A flag that specifies whether to force-stop the photon if it does not stop within a reasonable time or             does not implement a finalizer.</p></li>
+<li><p><strong>suppress_finalizer_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Indicating whether the photon was successfully stopped and removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>bool</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._absorb_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_absorb_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._absorb_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Stops and removes a list of photons from the loader’s registry.
+If a given photon is a string, it is looked up in the registry by filepath.
+The method returns a list of successful photon filepaths that were stopped and absorbed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photons</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list[Handler|str]</span></code>) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects representing photons, or a list of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>             names of the photons in the photon registry.</p></li>
+<li><p><strong>force_stop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of successful photon filepaths that were stopped and absorbed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._revert_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_revert_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_photon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validated_modules</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._revert_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Rolls back a photon to a working state if an atomic reload fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validated_photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Union[Handler,</span> <span class="pre">List[Handler]]</span></code>) – A single <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object or a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects which are validated successfully
+during the atomic reload.</p></li>
+<li><p><strong>validated_modules</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">ModuleType]</span></code>) – A dictionary containing the validated modules for the given photon.
+These modules are updated in the <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code> after the photon has been rolled back.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>:raises Any exception that may occur during the <code class="xref py py-func docutils literal notranslate"><span class="pre">validated_photon.start()</span></code> call.:</p>
+<p class="rubric">Notes</p>
+<p>This function is responsible for rolling back a photon to a working state if an atomic reload fails.        It takes two parameters: a validated photon and validated modules dictionary. If the validation passes         successfully, then the <a class="reference internal" href="#luminal.managers.loader.Loader._revert_photon" title="luminal.managers.loader.Loader._revert_photon"><code class="xref py py-func docutils literal notranslate"><span class="pre">_revert_photon()</span></code></a> function starts the validated photon by calling the        <code class="xref py py-func docutils literal notranslate"><span class="pre">validated_photon.start()</span></code> function. Afterward, the <code class="docutils literal notranslate"><span class="pre">_photons</span></code> collection is updated to hold the         working photon, and updated modules are passed to the <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code> by the <code class="xref py py-func docutils literal notranslate"><span class="pre">sys.modules.update()</span></code> call.</p>
+<p>This function expects the provided <code class="docutils literal notranslate"><span class="pre">validated_photon</span></code> to be a single <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object or a list of such objects.        It is also expected that the provided <code class="docutils literal notranslate"><span class="pre">validated_photon</span></code> has passed the validation check without any errors.</p>
+<ul class="simple">
+<li><p>Please note that any exception that is raised during the await <code class="xref py py-func docutils literal notranslate"><span class="pre">validated_photon.start()</span></code> function call        is propagated back to the caller. The exceptions could arise due to coding bugs, configuration issues, or other        environmental reasons.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._reload_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_reload_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._reload_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Reloads a photon handler or an entire photon atomically and returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Union[Handler,</span> <span class="pre">str]</span></code>) – A single handler object or the string name for the photon which needs to be reloaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>If a single photon is provided, it returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object.</p></li>
+<li><p>If multiple photons are provided or the photon to be reloaded has multiple handlers,</p></li>
+<li><p>it returns a list of the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Union[Handler,</span> <span class="pre">List[Handler]]</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Any exception that may occur during:</strong> – <ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">self._check_photon()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">_absorb_photon(validated_photon)()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">_emit_photon(photon)()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">_revert_photon(validated_photon,</span> <span class="pre">validated_modules)()</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function reloads a photon handler or an entire photon atomically and returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object(s).        The function starts by validating the provided photon by calling the <code class="xref py py-func docutils literal notranslate"><span class="pre">_check_photon(photon)()</span></code> function.        Once the validation is complete, this function collects all the validated modules for the photon across the system.</p>
+<p>Depending on the number of validated photons i.e., whether a single <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object or a list of them is provided,        the function iterates through each of them and collects all validated modules for each.        It then calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">_absorb_photon(validated_photon)()</span></code> function to atomically update the photon(s).        After an atomic update of the photon(s), it returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object(s) by calling the         <code class="xref py py-func docutils literal notranslate"><span class="pre">_emit_photon(photon)()</span></code> function.</p>
+<p>In case any exception occurs during the atomic update,        this function calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">_revert_photon(validated_photon,</span> <span class="pre">validated_modules)()</span></code>        function to fall back to the previous working state.</p>
+<ul class="simple">
+<li><p>Please note that any exception that is raised during any defined calls in this function is propagated back to the caller.        The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._reload_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_reload_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._reload_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Reloads a list of photon handlers or entire photons atomically and returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photons</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[Union[Handler,</span> <span class="pre">str]]</span></code>) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects or the string names for the photons that need to be reloaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects after the atomic reload process.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List[Handler]</span></code></p>
+</dd>
+</dl>
+<p>:raises Any exception that may occur during the <code class="xref py py-func docutils literal notranslate"><span class="pre">_reload_photon(photon)()</span></code> call.:</p>
+<p class="rubric">Notes</p>
+<p>This function reloads a list of photon handlers or entire photons atomically and returns the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code>         objects. The function loops through all provided handlers, atomically updates each of them using the previously defined         <code class="xref py py-func docutils literal notranslate"><span class="pre">_reload_photon(photon)()</span></code> function, and collects the updated <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects in a list. If the result of the         <code class="xref py py-func docutils literal notranslate"><span class="pre">_reload_photon(photon)()</span></code> function call returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects, this function concatenates        them onto the handlers list. If the result of the <code class="xref py py-func docutils literal notranslate"><span class="pre">_reload_photon(photon)()</span></code> function call returns a single <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code>        object, this function appends the single <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object onto the handlers list.</p>
+<ul class="simple">
+<li><p>Please note that any exception that is raised during the <code class="xref py py-func docutils literal notranslate"><span class="pre">_reload_photon(photon)()</span></code> function call is immediately propagated        back to the caller. The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader._observe_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_observe_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader._observe_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Observes photons for changes by continuously calculating their checksum and reloading when a change is detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photons_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The path to the photons directory which needs to be monitored.</p></li>
+<li><p><strong>loop_trace</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">LoopTrace</span></code>) – An optional trace object to keep track of loop iterations and allow testing of infinite loops, defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when the observer loop has been terminated.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Any exception that may occur during:</strong> – <ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">self.load_photons(photons_directory)()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">self.reload_photons(photons_to_reload)()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">loop_trace.evalutate_tasks()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">SystemUtils.continue_async(1)()</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function observes photons for changes by consistently calculating their checksum and reloading when a change is detected.        The function loops indefinitely until the <code class="docutils literal notranslate"><span class="pre">_is_watching</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>. The observation process starts by calling        the <code class="xref py py-func docutils literal notranslate"><span class="pre">load_photons(photons_directory)()</span></code> function to collect all the available photons. The function then makes a copy of all        the <code class="docutils literal notranslate"><span class="pre">_photons</span></code>, and then loops through this copy and calculates the current checksum of each photon.</p>
+<ul class="simple">
+<li><p>If the current photon’s checksum is different from the previous checksum value, the photon’s filepath is appended to the        <code class="docutils literal notranslate"><span class="pre">photons_to_reload</span></code> list.</p></li>
+<li><p>Once all the photons have been observed, the function checks whether <code class="docutils literal notranslate"><span class="pre">photons_to_reload</span></code> has any new entries.        If new entries exist, the function calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">reload_photons(photons_to_reload)()</span></code> function to atomically update        the observed photons.</p></li>
+<li><p>The function then pauses for one second by calling the <code class="xref py py-func docutils literal notranslate"><span class="pre">SystemUtils.continue_async(1)()</span></code> function before resuming with the        next cycle. In case the <code class="docutils literal notranslate"><span class="pre">loop_trace</span></code> parameter is provided, this function evaluates the provided loop tasks by calling the        <code class="xref py py-func docutils literal notranslate"><span class="pre">loop_trace.evalutate_tasks()</span></code> function.</p></li>
+<li><p>Please note that any exception that is raised during any defined calls in this function is propagated back to the caller.        The exceptions may arise due to coding bugs, configuration issues, or other environmental reasons.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.load_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IPhoton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.load_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Loads a photon module from a given path, and initializes a corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object.        The provided path must be an existing file path to a photon module, and not a directory.        This function takes an optional base class for the photon module, and a list of other class names to be loaded.        If the recursive flag is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, this method loads all photon modules recursively from the path.        The method raises a <code class="xref py py-class docutils literal notranslate"><span class="pre">PhotonNotFoundError</span></code> error if the provided path is not found, or if it is a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A string representing the path to the photon module file to be loaded.</p></li>
+<li><p><strong>photon_base</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>) – An optional base class type for photon modules to be loaded. Defaults to <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code>.</p></li>
+<li><p><strong>other_classes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code>) – An optional list of string names of other classes to load from the photon module. Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>recursive</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – A <cite>bool</cite> flag that indicates whether to search for photon modules recursively under the provided path. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects representing the loaded photons, or an empty list if no photons are loaded successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../../errors/cleanup/index.html#luminal.errors.cleanup.PhotonNotFoundError" title="luminal.errors.cleanup.PhotonNotFoundError"><strong>PhotonNotFoundError</strong></a> – An error if the provided photon path doesn’t exist or is a directory.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">photon</span> <span class="o">=</span> <span class="k">await</span> <span class="n">load_photon</span><span class="p">(</span><span class="s2">&quot;photons/my_photon.py&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># A photon will then be emitted and ready to start.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.load_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IPhoton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.load_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Loads a directory of photon modules, each module being represented by a corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object, and         returns a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects. The provided path must be an existing directory path, and not a file.        This function takes an optional base class for photon modules, and a list of other class names to be loaded.        If the <code class="docutils literal notranslate"><span class="pre">recursive</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, all photon modules will be loaded recursively from the directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photons_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Represents the path to the directory containing the photon modules to be loaded.</p></li>
+<li><p><strong>photon_base</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>]) – An optional base class type for photon modules to be loaded. Defaults to <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code>.</p></li>
+<li><p><strong>other_classes</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code>]) – An optional list of string names of other classes to load from the photon. Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>recursive</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – A flag that indicates whether to search for photon modules recursively under the provided directory path. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A collection of objects representing the loaded photons, or an empty list if no photons were loaded successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list[Handler]</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../../errors/system/index.html#luminal.errors.system.DirectoryNotFoundError" title="luminal.errors.system.DirectoryNotFoundError"><strong>DirectoryNotFoundError</strong></a> – If the provided photon path doesn’t exist, or is a file.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">photons</span> <span class="o">=</span> <span class="k">await</span> <span class="n">load_photons</span><span class="p">(</span><span class="s2">&quot;photons/&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># A list of photons will then be emitted and ready to start.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.unload_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unload_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.unload_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Stops and unloads a specified photon from the loader’s photon registry by calling its finalizer, if any,        and disposing unused resources. If the given photon is a string, it is looked up in the registry by filepath.        The method returns a boolean value indicating whether the photon was successfully stopped and unloaded.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Unloading a single photon unloads the entire file from which that photon originated. So, that means all        other photons that may be found within the file as well.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span> <span class="pre">|</span> <span class="pre">str</span></code>) – The photon handler object or filepath which represents a running photon to be unloaded.</p></li>
+<li><p><strong>force_stop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – A flag which allows a photon to be immediately halted and collected without calling its finalizer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A flag indicating if the provided photon was unloaded.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">await</span> <span class="n">unload_photon</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">await</span> <span class="n">unload_photon</span><span class="p">(</span><span class="s1">&#39;photons/a.py&#39;</span><span class="p">,</span> <span class="n">force_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.unload_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unload_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.unload_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Stops and unloads a collection of photons from the loader’s photon registry by calling their finalizers, if any,         and disposing unused resources. If a given photon is a string, it is looked up in the registry by filepath.        The function returns a list of filepaths indicating whether the photons were successfully stopped and unloaded.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Unloading any photon unloads the entire file from which that photon originated. So, that means all        other photons that may be found within the file as well.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photons</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list[Handler|str]</span></code>) – A list of photon handler objects or filepaths to be unloaded.</p></li>
+<li><p><strong>force_stop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – A flag which allows a photon to be immediately halted and collected without calling its finalizer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list containing the filepaths of all unloaded photons.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list[str]</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">await</span> <span class="n">unload_photons</span><span class="p">([</span><span class="n">handler1</span><span class="p">,</span> <span class="n">handler2</span><span class="p">])</span>
+<span class="go">[&#39;photons/a.py&#39;, &#39;photons/a.py&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">await</span> <span class="n">unload_photons</span><span class="p">([</span><span class="s1">&#39;photons/a.py&#39;</span><span class="p">,</span> <span class="s1">&#39;photons/b.py&#39;</span><span class="p">],</span> <span class="n">force_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[&#39;photons/a.py&#39;, &#39;photons/b.py&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.reload_photon">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reload_photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.reload_photon" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Atomically reloads the specified photon and provides a fresh handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler|str</span></code>) – The photon handler or filepath of a photon that is to be reloaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A handler or list of handler objects representing the newly updated photon.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler|list[Handler]</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function makes a copy of both the loader’s <code class="docutils literal notranslate"><span class="pre">self._photons</span></code>,
+and the related <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>. After which the provided photon will
+be unloaded, loaded again, and then returned as a freshly updated photon
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> object. If any errors, in either unloading or loading,
+all photons will revert to their original states.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reloaded_handler</span> <span class="o">=</span> <span class="k">await</span> <span class="n">reload_photon</span><span class="p">(</span><span class="n">my_photon_handler</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># A new handler will be created and returned from the original handler object.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reloaded_handler</span> <span class="o">=</span> <span class="k">await</span> <span class="n">reload_photon</span><span class="p">(</span><span class="s1">&#39;photons/my_photon.py&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># A new handler will be created and returned from the provided handler file path.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.reload_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reload_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.reload_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Atomically reloads the specified photons and provides a list of fresh handlers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of handler objects representing the newly updated photons.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list[Handler]</span></code></p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photons</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="../handler/index.html#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><em>luminal.managers.handler.Handler</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function makes a copy of both the loader’s <code class="docutils literal notranslate"><span class="pre">self._photons</span></code>,
+and the related <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>. After which the provided photons will
+be unloaded, loaded again, and then returned as freshly updated photon
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code> objects. If any errors, in either unloading or loading,
+all photons will revert to their original states.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reloaded_handlers</span> <span class="o">=</span> <span class="k">await</span> <span class="n">reload_photons</span><span class="p">([</span><span class="n">my_photon_handler</span><span class="p">,</span> <span class="n">second_photon_handler</span><span class="p">])</span>
+<span class="gp">... </span><span class="c1"># New handlers will be created and returned from the original handler objects.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reloaded_handlers</span> <span class="o">=</span> <span class="k">await</span> <span class="n">reload_photons</span><span class="p">(</span><span class="s1">&#39;photons/my_photon.py&#39;</span><span class="p">,</span> <span class="s1">&#39;photons/second_photon.py&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># New handlers will be created and returned from the provided handler file path.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.watch_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">watch_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photons_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.watch_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Creates a thread manager and spawns a new thread to monitor photons in a given directory        for changes and reloads them atomically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>photons_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The directory path to the photons folder which needs to be monitored.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If the <code class="docutils literal notranslate"><span class="pre">photons_directory</span></code> argument is not a string.</p></li>
+<li><p><a class="reference internal" href="../../errors/system/index.html#luminal.errors.system.DirectoryNotFoundError" title="luminal.errors.system.DirectoryNotFoundError"><strong>DirectoryNotFoundError</strong></a> – If the <code class="docutils literal notranslate"><span class="pre">photons_directory</span></code> argument is not a valid directory.</p></li>
+<li><p><strong>ThreadManagerAlreadyRunning</strong> – If the loader is already monitoring photons.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This asynchronous function spawns a thread manager and a new thread to monitor photons in a given directory.</p></li>
+<li><p>The function starts by validating whether the <cite>photons_directory</cite> argument is a valid directory and of type <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p></li>
+<li><p>If the <cite>_is_watching</cite> flag is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the function raises a warning by raising <cite>ThreadManagerAlreadyRunningError</cite>.</p></li>
+<li><p>Then the function sets the <code class="docutils literal notranslate"><span class="pre">_is_watching</span></code> flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> and sets the number of allowed threads to one.        The function appends a new thread to the thread manager through the <code class="xref py py-func docutils literal notranslate"><span class="pre">_start_watching()</span></code> callback function.        The thread is then started and runs indefinitely until the <code class="docutils literal notranslate"><span class="pre">_is_watching</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.        The wait time between cycles is set to one second by calling the <code class="xref py py-func docutils literal notranslate"><span class="pre">SystemUtils.continue_async(1)()</span></code> function.</p></li>
+<li><p>Please note that this function starts the thread manager and a new thread to monitor photons.         Hence, the thread manager must be stopped by calling the <a class="reference internal" href="#luminal.managers.loader.Loader.stop_watching_photons" title="luminal.managers.loader.Loader.stop_watching_photons"><code class="xref py py-func docutils literal notranslate"><span class="pre">stop_watching_photons()</span></code></a> function        of the photon <a class="reference internal" href="#luminal.managers.loader.Loader" title="luminal.managers.loader.Loader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code></a> instance.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.loader.Loader.stop_watching_photons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_watching_photons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">halt_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.loader.Loader.stop_watching_photons" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Stops all threads from watching changes in photons and gracefully stops the thread manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>halt_threads</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – An optional boolean flag to halt all running threads immediately without a flag,
+instead of gracefully stopping the thread manager, defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This asynchronous function stops all threads and gracefully shuts down the thread manager from watching changes in photons.</p>
+<ul class="simple">
+<li><p>The function starts by setting the <code class="docutils literal notranslate"><span class="pre">_is_watching</span></code> flag to <code class="docutils literal notranslate"><span class="pre">False</span></code>. If <code class="docutils literal notranslate"><span class="pre">halt_threads</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,        the function calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">halt()</span></code> function of the thread manager instance to stop all running threads immediately.        If <code class="docutils literal notranslate"><span class="pre">halt_threads</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the function calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">stop()</span></code> function to gracefully stop all threads.</p></li>
+<li><p>To prevent memory leaks and other issues, it is recommended to stop any running threads gracefully        instead of abruptly halting or killing them. In most cases, setting <code class="docutils literal notranslate"><span class="pre">halt_threads</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> is preferred to ensure        a graceful shutdown of all threads.</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../handler/index.html" class="btn btn-neutral float-left" title="luminal.managers.handler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../resolver/index.html" class="btn btn-neutral float-right" title="luminal.managers.resolver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

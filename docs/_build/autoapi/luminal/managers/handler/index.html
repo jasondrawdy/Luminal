@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luminal.managers.handler &mdash; Luminal 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="luminal.managers.loader" href="../loader/index.html" />
+    <link rel="prev" title="luminal.managers" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Luminal
+          </a>
+<div>
+  <style>
+    header-link, header-link:active, header-link:visited { color: white; font-size: 14px;}
+    header-link:hover { color: #DCDCDC; }
+  </style>
+  <img class="logo" style="width:100px !important;height:100px !important;"
+   src="https://github.com/jasondrawdy/Demos/assets/40871836/450df667-fa8f-4456-89e5-d9caba40cf62">
+  <p>
+    Version 1.0 — (Ancilla)</br>
+	<a href="https://github.com/jasondrawdy/luminal">
+		<header-link>
+      <b><u>Project Homepage</u></b>
+    </header-link>
+	</a>
+  <a href="https://discord.gg/CnE2cFkMtt"> </br>
+		<header-link>
+      <b><u>Official Discord</u></b>
+    </header-link>
+	</a>
+  </p>
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search documentation..." aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Library Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/metadata/index.html">metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/photon/index.html">photon</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Managers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loader/index.html">loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resolver/index.html">resolver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../threads/index.html">threads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracer/index.html">tracer</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Errors</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/cleanup/index.html">cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/system/index.html">system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors/threads/index.html">threads</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/colors/index.html">colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/logger/index.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/utils/index.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sentinel/index.html">sentinel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Luminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.handler</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+              
+  <section id="module-luminal.managers.handler">
+<span id="luminal-managers-handler"></span><h1><a class="reference internal" href="#module-luminal.managers.handler" title="luminal.managers.handler"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luminal.managers.handler</span></code></a><a class="headerlink" href="#module-luminal.managers.handler" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Handler</span></code></a></p></td>
+<td><p>Wraps an <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code> or another inherited photon base class and provides access to local instance information.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checksum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler" title="Permalink to this definition"></a></dt>
+<dd><p>Wraps an <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code> or another inherited photon base class and provides access to local instance information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logging</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – </p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – </p></li>
+<li><p><strong>filepath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – </p></li>
+<li><p><strong>checksum</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – </p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="../../interfaces/photon/index.html#luminal.interfaces.photon.IPhoton" title="luminal.interfaces.photon.IPhoton"><em>luminal.interfaces.photon.IPhoton</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.managers.handler.Handler.name" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the name of the current <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the current <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler.filepath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filepath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.managers.handler.Handler.filepath" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the file path of the current <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The file path of the current <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler.checksum">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checksum</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></em><a class="headerlink" href="#luminal.managers.handler.Handler.checksum" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the checksum of the original photon file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The checksum of the original file containing the photon.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> instance as its string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A string representation of the <a class="reference internal" href="#luminal.managers.handler.Handler" title="luminal.managers.handler.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> object created by the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">__dict__()</span></code> dunder method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._get_checksum">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_checksum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2**20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._get_checksum" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Generates a calculated <code class="docutils literal notranslate"><span class="pre">SHA512</span></code> hash for a given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the file to generate the checksum for.</p></li>
+<li><p><strong>block</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Chunk size to read and hash the file in bytes. Default is <code class="docutils literal notranslate"><span class="pre">2^20</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated <code class="docutils literal notranslate"><span class="pre">SHA512</span></code> hash of the file, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there was an error generating the checksum.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function generates a <code class="docutils literal notranslate"><span class="pre">SHA512</span></code> hash for a given file by reading the file in blocks and hashing each block.        The generated hash is a digest checksum (a unique fixed-sized representation of the file content).        The file is treated as a binary file (read in ‘rb’ mode) for proper handling of all types of files.</p></li>
+<li><p>The reason <code class="docutils literal notranslate"><span class="pre">SHA512</span></code> was chosen is purely for the lack of collisions at runtime when performing dynamic checks.</p></li>
+<li><p>If the specified file cannot be found or if there are any errors while generating the checksum, returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._clear_module_references">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_clear_module_references</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._clear_module_references" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>Clears all references for the current handler module and its submodules in <cite>sys.modules</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A flag value indicating whether references were cleared successfully.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function clears all references to the current module and any of its submodules in <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>.        It is used to ensure that a module can be safely deleted from memory without any leftover references.        The function returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the operation to clear references succeeds. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._stop_photon_threads">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_stop_photon_threads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._stop_photon_threads" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>This function stops all of the running threads that belong to the current photon’s thread group. It is typically
+called during a photon unload to ensure that no threads are left running that could cause errors or conflicts
+with a new, reloaded photon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A flag indicating whether all photon threads were successfully stopped. This returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if
+all photon threads are successfully stopped. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._stop_photon_processes">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_stop_photon_processes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._stop_photon_processes" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>This function is responsible for stopping and terminating all of the child processes spawned by the handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A flag indicating whether any child process for the handler were stopped. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._force_stop">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_force_stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._force_stop" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>This function is responsible for forcefully stopping and halting all the running threads and processes of the handler.
+It calls the <a class="reference internal" href="#luminal.managers.handler.Handler._stop_photon_threads" title="luminal.managers.handler.Handler._stop_photon_threads"><code class="xref py py-func docutils literal notranslate"><span class="pre">_stop_photon_threads()</span></code></a> and <a class="reference internal" href="#luminal.managers.handler.Handler._stop_photon_processes" title="luminal.managers.handler.Handler._stop_photon_processes"><code class="xref py py-func docutils literal notranslate"><span class="pre">_stop_photon_processes()</span></code></a> methods to perform these tasks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler._stop">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler._stop" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>This function stops the running <code class="xref py py-class docutils literal notranslate"><span class="pre">IPhoton</span></code> instance, halting all the child threads and processes of the instance
+if any exist. If <code class="docutils literal notranslate"><span class="pre">force_stop</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, this function calls the <a class="reference internal" href="#luminal.managers.handler.Handler._force_stop" title="luminal.managers.handler.Handler._force_stop"><code class="xref py py-func docutils literal notranslate"><span class="pre">_force_stop()</span></code></a> method to stop the instance.
+Otherwise, it first calls the <code class="xref py py-func docutils literal notranslate"><span class="pre">finalize()</span></code> method if present in the current instance. If the <code class="xref py py-func docutils literal notranslate"><span class="pre">finalize()</span></code> method
+does not exist or raises an error, then the <a class="reference internal" href="#luminal.managers.handler.Handler._force_stop" title="luminal.managers.handler.Handler._force_stop"><code class="xref py py-func docutils literal notranslate"><span class="pre">_force_stop()</span></code></a> method is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>force_stop</strong> (Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – A boolean flag indicating whether to forcefully stop the photon instance. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../../errors/cleanup/index.html#luminal.errors.cleanup.PhotonNotInitializedError" title="luminal.errors.cleanup.PhotonNotInitializedError"><strong>PhotonNotInitializedError</strong></a> – If the photon has not been initialized.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="luminal.managers.handler.Handler.start">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#luminal.managers.handler.Handler.start" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">|coro|</span></code></p>
+<p>This function starts running the <code class="docutils literal notranslate"><span class="pre">IPhoton</span></code> instance by creating it if it does not exist already.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If already started, it checks if it’s a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>. If the instance is not a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>, it        initializes the <code class="docutils literal notranslate"><span class="pre">IPhoton</span></code> instance and stores it as a tuple with a second value set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="luminal.managers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../loader/index.html" class="btn btn-neutral float-right" title="luminal.managers.loader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jason Drawdy.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

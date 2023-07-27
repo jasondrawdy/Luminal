@@ -1,0 +1,18 @@
+:py:mod:`luminal`
+=================
+
+.. py:module:: luminal
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   errors/index.rst
+   interfaces/index.rst
+   managers/index.rst
+   tools/index.rst
+
+
