@@ -1,4 +1,10 @@
 ![converted_img](https://github.com/jasondrawdy/Demos/assets/40871836/3b0f3f7e-70fa-4f31-933a-d1228eec1213)
+![version](https://github.com/jasondrawdy/Demos/assets/40871836/9806c034-f00b-457b-a88a-2b18b051a835)
+![pypi](https://github.com/jasondrawdy/Demos/assets/40871836/466b0a6f-b6a8-41a0-8f87-32756a648f25)
+![python](https://github.com/jasondrawdy/Demos/assets/40871836/40d61667-4b6e-4c3f-8f45-d2247d86f1d1)
+![coverage](https://github.com/jasondrawdy/Demos/assets/40871836/a955f1bc-f099-4a79-a60c-28ed5084645f)
+![docs](https://github.com/jasondrawdy/Demos/assets/40871836/3e655191-e627-4bd7-8c4d-229333beb578)
+![license](https://github.com/jasondrawdy/Demos/assets/40871836/0b6f7328-4c4a-451e-be98-a0ea6d5cf7c3)
 # Description
 
 Luminal offers developers the perfect solution to streamline and optimize their projects effortlessly by creating dynamic and modular plugins, a.k.a *Photons*. The library has been meticulously created based on best practices and offers a rich set of features and capabilities. 
